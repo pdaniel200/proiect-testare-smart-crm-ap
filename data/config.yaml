@@ -1,0 +1,5 @@
+#alegeti un tip de browswer chrome/firefox
+browser: chrome
+
+#Vizibilitate browser la rularea testului True/False
+headless: False
