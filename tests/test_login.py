@@ -5,7 +5,7 @@ from tests.baza_test import PrincipalulTest
 
 
 # definire clasa TesteazaCautare, care moșteneste functii din clasa PrincipalulTest
-class TesteazaCautare(PrincipalulTest):
+class TesteazaLogin(PrincipalulTest):
 
     # decorator Pytest care incarca paginile necesare inaintea testului
     @pytest.fixture
