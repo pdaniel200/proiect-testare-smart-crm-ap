@@ -9,7 +9,7 @@ from data.locators import LocatoriPaginaCautare
 
 
 # Definire clasa CautarePagina care moștenește funcționalitatea din clasa de bază PaginaDeBaza
-class CautarePagina(PaginaDeBaza):
+class DeschidePagina(PaginaDeBaza):
 
     def __init__(self, driver, wait):
         self.adresa_smart_crm = "https://smart-crm.ro/"

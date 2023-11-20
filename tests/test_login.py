@@ -1,6 +1,6 @@
 # importare module
 import pytest
-from pages.pagina_login import CautarePagina
+from pages.pagina_login import DeschidePagina
 from tests.baza_test import PrincipalulTest
 
 
@@ -11,7 +11,7 @@ class TesteazaLogin(PrincipalulTest):
     @pytest.fixture
     def incarcare_pagina(self):
         # initializare si navigare la pagina de cautare
-        self.page = CautarePagina(self.driver, self.wait)
+        self.page = DeschidePagina(self.driver, self.wait)
         self.page.mergi_la_pagina_scrm()
 
     # test pentru verificarea titlului paginii de cautare
