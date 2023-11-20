@@ -13,20 +13,22 @@ from selenium.webdriver.firefox.service import Service as ServiceFirefox
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 
-
-
 # configurare nivel de log pentru webdriver manager
 os.environ['WDM_LOG_LEVEL'] = '0'
 
 
 # functie pentru citire configurație din config.yaml
 def config():
+    # stabilirea caii catre fisierul de configurare YAML
     path = Path(__file__).parent / "../data/config.yaml"
     try:
+        # deschiderea si citirea fisierului YAML
         with open(path) as config_file:
+            # incarcarea continutului fisierului YAML intr-un obiect de date
             data = yaml.load(config_file, Loader=yaml.FullLoader)
         return data
     finally:
+        # inchiderea fisierului in blocul 'finally'
         config_file.close()
 
 
@@ -55,10 +57,10 @@ class PrincipalulTest:
             # initializare driver firefox
             self.driver = webdriver.Firefox(service=ServiceFirefox(GeckoDriverManager().install()), options=options)
         else:
-            raise Exception("Tip de browser nespecificat in config.yaml")
+            raise Exception("Nu sunt configurari pentru  tipul de browser ales din config.yaml")
 
         self.driver.maximize_window()  # maximizare fereastra browser
-        self.wait = WebDriverWait(self.driver, 10)  # asteptare timp de 10 secunde
+        self.wait = WebDriverWait(self.driver, 5)  # asteptare timp de 5 secunde
         yield self.wait, self.driver  # rulare test
 
         if self.driver is not None:  # inchidere driver după incheierea testului

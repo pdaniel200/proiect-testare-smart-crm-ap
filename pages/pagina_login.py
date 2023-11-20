@@ -47,6 +47,6 @@ class CautarePagina(PaginaDeBaza):
         self.driver.find_element(*self.locator.OPRIRE_CRONOMETRU).click()
         # salveaza o captura de ecran a rezultatelor intr-un fișier PNG
         self.driver.save_screenshot("results/task_started.png")
-        time.sleep(3)
+        time.sleep(5)
         self.driver.find_element(*self.locator.BUTON_LOGOUT).click()
         time.sleep(3)
