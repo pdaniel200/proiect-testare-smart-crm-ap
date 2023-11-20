@@ -1,6 +1,6 @@
 # importare module
 import pytest
-from pages.pagina_cautare import CautarePagina
+from pages.pagina_login import CautarePagina
 from tests.baza_test import PrincipalulTest
 from selenium.webdriver.common.keys import Keys
 
@@ -14,7 +14,7 @@ class TesteazaCautare(PrincipalulTest):
     def incarcare_pagina(self):
         # initializare si navigare la pagina de cautare
         self.page = CautarePagina(self.driver, self.wait)
-        self.page.mergi_la_cautare_pagina()
+        self.page.mergi_la_pagina_scrm()
 
     # test pentru verificarea titlului paginii de cautare
     def test_titlu(self, incarcare_pagina):
@@ -24,4 +24,4 @@ class TesteazaCautare(PrincipalulTest):
 
     def test_login(self, incarcare_pagina):
         # Deschide pagina principala
-        self.page.reazizare_login("https://smart-crm.ro/")
+        self.page.realizare_login("https://smart-crm.ro/")

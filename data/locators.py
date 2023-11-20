@@ -2,7 +2,6 @@ from selenium.webdriver.common.by import By
 
 
 class LocatoriPaginaCautare:
-
     BUTON_AUTENTIFICARE = (By.XPATH, "//a[@class='action_button top-bar-right-button ']")
     USERNAME_INPUT = (By.ID, "email")
     BUTON_INAINTE = (By.XPATH, "//button[@id='submit-next']")

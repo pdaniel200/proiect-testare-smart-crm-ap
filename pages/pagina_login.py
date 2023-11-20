@@ -17,14 +17,14 @@ class CautarePagina(PaginaDeBaza):
         super().__init__(driver, wait)
 
     # Navigare catre pagina de cautare
-    def mergi_la_cautare_pagina(self):
+    def mergi_la_pagina_scrm(self):
         self.mergi_la_pagina(self.adresa_smart_crm)
 
     # Metoda de verificare a titlului paginii
     def verifica_titlu(self, title):
         self.wait.until(EC.title_contains(title))
 
-    def reazizare_login(self, input_text):
+    def realizare_login(self, input_text):
         time.sleep(2)
         # salveaza o captura de ecran a rezultatelor intr-un fișier PNG
         self.driver.save_screenshot("results/main_page.png")
