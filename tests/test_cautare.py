@@ -2,6 +2,8 @@
 import pytest
 from pages.pagina_cautare import CautarePagina
 from tests.baza_test import PrincipalulTest
+from selenium.webdriver.common.keys import Keys
+
 
 
 # definire clasa TesteazaCautare, care moșteneste functii din clasa PrincipalulTest
@@ -16,12 +18,10 @@ class TesteazaCautare(PrincipalulTest):
 
     # test pentru verificarea titlului paginii de cautare
     def test_titlu(self, incarcare_pagina):
-        self.page.verifica_titlu("DuckDuckGo — ")
+        self.page.verifica_titlu("Smart CRM")
 
-    # test pentru efectuarea unei cautari si verificarea rezultatelor
-    def test_cautare(self, incarcare_pagina):
-        self.page.reazizare_cautare("amazinghouse.ro")
+    # test pentru efectuarea de login si pornire oprire cronometru
 
-    # test pentru efectuarea unei cautari si verificarea rezultatelor
-    # def test_login(self, incarcare_pagina):
-        # self.page.reazizare_login("smart-crm.ro")
+    def test_login(self, incarcare_pagina):
+        # Deschide pagina principala
+        self.page.reazizare_login("https://smart-crm.ro/")

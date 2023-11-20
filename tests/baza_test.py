@@ -13,6 +13,8 @@ from selenium.webdriver.firefox.service import Service as ServiceFirefox
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 
+
+
 # configurare nivel de log pentru webdriver manager
 os.environ['WDM_LOG_LEVEL'] = '0'
 

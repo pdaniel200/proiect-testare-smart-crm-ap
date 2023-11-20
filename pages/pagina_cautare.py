@@ -1,4 +1,6 @@
 # Importa din Selenium pentru a verifica starea paginii
+import time
+
 from selenium.webdriver.support import expected_conditions as EC
 
 # Importa clasele de baza si locatorii paginii de căutare (SearchPageLocators)
@@ -10,32 +12,42 @@ from data.locators import LocatoriPaginaCautare
 class CautarePagina(PaginaDeBaza):
 
     def __init__(self, driver, wait):
-        self.url = "https://duckduckgo.com/"
+        self.adresa_smart_crm = "https://smart-crm.ro/"
         self.locator = LocatoriPaginaCautare
         super().__init__(driver, wait)
 
     # Navigare catre pagina de cautare
     def mergi_la_cautare_pagina(self):
-        self.mergi_la_pagina(self.url)
+        self.mergi_la_pagina(self.adresa_smart_crm)
 
     # Metoda de verificare a titlului paginii
     def verifica_titlu(self, title):
         self.wait.until(EC.title_contains(title))
 
-    # Metoda pentru a efectua o cautare, introducand un text in câmpul de cautare si apasand butonul de cautare
-    def reazizare_cautare(self, input_text):
-        self.driver.find_element(*self.locator.SEARCH_INPUT).send_keys(input_text)
-        self.driver.find_element(*self.locator.SEARCH_BUTTON).click()
-        # asteapta ca rezultatele căutarii sa fie prezente in pagina
-        self.wait.until(EC.presence_of_element_located(self.locator.RESULTS))
+    def reazizare_login(self, input_text):
+        time.sleep(2)
         # salveaza o captura de ecran a rezultatelor intr-un fișier PNG
-        self.driver.save_screenshot("results/results.png")
-
-    ''' def reazizare_login(self, input_text):
-        self.driver.find_element(*self.locator.SEARCH_INPUT).send_keys(input_text)
-        self.driver.find_element(*self.locator.SEARCH_BUTTON).click()
-        # asteapta ca rezultatele căutarii sa fie prezente in pagina
-        self.wait.until(EC.presence_of_element_located(self.locator.RESULTS))
+        self.driver.save_screenshot("results/main_page.png")
+        self.driver.find_element(*self.locator.BUTON_AUTENTIFICARE).click()
+        time.sleep(2)
+        self.driver.find_element(*self.locator.USERNAME_INPUT).send_keys('testcompany@smart-crm.ro')
+        time.sleep(1)
+        self.driver.find_element(*self.locator.BUTON_INAINTE).click()
+        # asteapta pana campul parola sa fie prezente in pagina
+        time.sleep(3)
+        # self.wait.until(EC.presence_of_element_located(self.locator.APARE_INPUT))
+        self.driver.find_element(*self.locator.PASSWORD_INPUT).send_keys('cGR4n93O9N9Nel9a')
+        self.driver.find_element(*self.locator.BUTON_LOGIN).click()
+        time.sleep(3)
         # salveaza o captura de ecran a rezultatelor intr-un fișier PNG
-        self.driver.save_screenshot("results/results.png")
-'''
+        self.driver.save_screenshot("results/login_page.png")
+        self.driver.get("https://app.smart-crm.ro/public/account/tasks")
+        time.sleep(3)
+        self.driver.find_element(*self.locator.PORNIRE_CRONOMETRU).click()
+        time.sleep(10)
+        self.driver.find_element(*self.locator.OPRIRE_CRONOMETRU).click()
+        # salveaza o captura de ecran a rezultatelor intr-un fișier PNG
+        self.driver.save_screenshot("results/task_started.png")
+        time.sleep(3)
+        self.driver.find_element(*self.locator.BUTON_LOGOUT).click()
+        time.sleep(3)

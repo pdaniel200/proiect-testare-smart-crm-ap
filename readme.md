@@ -20,6 +20,14 @@
 1. Deschide un terminal
 2. Din directorul rădăcină al proiectului rulați: `pytest -v --html=results/report.html`
 
+# Se poate alege un tip de browswer chrome/firefox
+1. browser: chrome
+2. browser: firefox
+
+# Vizibilitate browser la rularea testului True/False
+1. headless: False
+2. headless: True
+
 # Alte informații
 
 Optiune de a alege tipul de browser de pe care se face testul
