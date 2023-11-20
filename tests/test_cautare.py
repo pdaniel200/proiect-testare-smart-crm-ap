@@ -2,8 +2,6 @@
 import pytest
 from pages.pagina_login import CautarePagina
 from tests.baza_test import PrincipalulTest
-from selenium.webdriver.common.keys import Keys
-
 
 
 # definire clasa TesteazaCautare, care moșteneste functii din clasa PrincipalulTest

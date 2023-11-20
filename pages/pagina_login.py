@@ -35,7 +35,6 @@ class CautarePagina(PaginaDeBaza):
         self.driver.find_element(*self.locator.BUTON_INAINTE).click()
         # asteapta pana campul parola sa fie prezente in pagina
         time.sleep(3)
-        # self.wait.until(EC.presence_of_element_located(self.locator.APARE_INPUT))
         self.driver.find_element(*self.locator.PASSWORD_INPUT).send_keys('cGR4n93O9N9Nel9a')
         self.driver.find_element(*self.locator.BUTON_LOGIN).click()
         time.sleep(3)

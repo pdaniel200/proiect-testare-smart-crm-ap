@@ -5,7 +5,6 @@ class LocatoriPaginaCautare:
     BUTON_AUTENTIFICARE = (By.XPATH, "//a[@class='action_button top-bar-right-button ']")
     USERNAME_INPUT = (By.ID, "email")
     BUTON_INAINTE = (By.XPATH, "//button[@id='submit-next']")
-    #APARE_INPUT = (By.XPATH, "//input[@id='password']")
     PASSWORD_INPUT = (By.ID, "password")
     BUTON_LOGIN = (By.ID, "submit-login")
     APARE_PAGINA = (By.XPATH, "//a[@title='Panou Utilizator']")
