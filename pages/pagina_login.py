@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 # Importa clasele de baza si locatorii paginii de căutare (SearchPageLocators)
 from pages.pagina_de_baza import PaginaDeBaza
-from data.locators import LocatoriPaginaCautare
+from data.locators import LocatoriPaginaSmartCrm
 
 
 # Definire clasa CautarePagina care moștenește funcționalitatea din clasa de bază PaginaDeBaza
@@ -13,7 +13,7 @@ class DeschidePagina(PaginaDeBaza):
 
     def __init__(self, driver, wait):
         self.adresa_smart_crm = "https://smart-crm.ro/"
-        self.locator = LocatoriPaginaCautare
+        self.locator = LocatoriPaginaSmartCrm
         super().__init__(driver, wait)
 
     # Navigare catre pagina de cautare

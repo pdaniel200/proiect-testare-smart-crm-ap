@@ -1,39 +1,38 @@
-# Testare login si rulare si oprire cronometru, Chrome si Firefox
+# Testing login, running and stopping the timer, Chrome and Firefox
 
 
 
-
-# Versiune
+# Version
 
 * Python 3.10
 
-# Rulare
+# Run
 
-1. Deschide un terminal
-2. Accesați directorul rădăcină al proiectului "/proiect-testare-ap/".
-3. Creați un mediu virtual: `py -m venv venv`
-4. Activați mediul virtual: `.\venv\Scripts\activate`
-5. Descărcați bibliotecile necesare:  `pip install -r requirements.txt`
+1. Open a terminal
+2. Go to the root directory of the project "/ap-testing-project/".
+3. Create a virtual environment: `py -m venv venv`
+4. Activate the virtual environment: `.\venv\Scripts\activate`
+5. Download the required libraries: `pip install -r requirements.txt`
 
-# Executare test
+# Test execution
 
-1. Deschide un terminal
-2. Din directorul rădăcină al proiectului rulați: `pytest -v --html=results/report.html`
+1. Open a terminal
+2. From the project root directory run: `pytest -v --html=results/report.html`
 
-# Se poate alege un tip de browswer chrome/firefox pentru efectuarea testului
+# You can choose a type of brower from wich yo can run the test chrome/firefox
 1. browser: chrome
 2. browser: firefox
 
-Testele vor fi executate în Chrome dar pot fi modificate în fișierul „/data/config.yaml” pentru a se executa si din Firefox
+The tests will be executed in Chrome but can be modified in the "/data/config.yaml" file to also be executed in Firefox
 
-# Vizibilitate browser la rularea testului True/False
-1. headless: False
-2. headless: True
+# Browser visibility when running the test: True or False
+1. headless: False - the browser will be visible while executing the test
+2. headless: True - the browser will not be visible while executing the test.
 
-# Rezultate
+# Results
 
-Pentru a verifica raportul, deschideți '/results/report.html' odată ce testul s-a încheiat.
+To check the report, open '/results/report.html' once the test has finished.
 
-# Se fac screenshoturi la fiecare pas major
+# Screenshots are taken at every major step
 
-Pentru a verifica raportul, deschideți '/results/
+To check the report, open '/results/
