@@ -1,5 +1,6 @@
 # Project
 .env
+Tests/test_login_smart_crm2.py
 
 # Python
 venv/*

@@ -3,7 +3,6 @@
 
     pentru rularea testelor cu marcarea smoke se foloseste comanda:
     pytest -k smoke --html=Results/report_test_smoke.html Tests/test_login_smart_crm.py
-    pytest -m smoke --html=Results/report_test_smoke.html Tests/test_login_smart_crm.py
 '''
 
 import unittest
@@ -45,8 +44,6 @@ class TestLoginSmartCRM(unittest.TestCase, LoginPage, DashboardPage, ConturiBanc
         cls.PASSWORD = config('PAROLA')
         cls.PAROLA_GRESITA = config('PAROLA_GRESITA')
 
-        # Initializare o instanta Chrome WebDriver
-        #cls.driver = webdriver.Chrome()
         # Seteaza asteptarea implicita
         cls.driver.implicitly_wait(10)
         # Maximizare fereastra browser pentru testare
@@ -76,7 +73,6 @@ class TestLoginSmartCRM(unittest.TestCase, LoginPage, DashboardPage, ConturiBanc
         self.login_page.enter_username(self.USERNAME)
         time.sleep(2)
         self.login_page.enter_password(self.PASSWORD)
-
         # Salveaza o captura de ecran dupa oprirea cronometrului
         self.login_page.driver.save_screenshot("Results/test_a_login_page.png")
         time.sleep(2)
@@ -204,21 +200,16 @@ class TestLoginSmartCRM(unittest.TestCase, LoginPage, DashboardPage, ConturiBanc
         self.assertEqual(message, "Aceste acreditări nu se potrivesc cu înregistrările noastre.")
         time.sleep(1)
         # Salvați o captură de ecran a paginii de conectare cu mesajul parola greșită
-        self.login_page.driver.save_screenshot("Results/test_login_invalid_pass.png")
+        self.login_page.driver.save_screenshot("Results/test_j_login_invalid_pass.png")
         time.sleep(2)
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Testare Pagina Login - Test login si returnare mesaj a fost efectuat cu succes.")
 
 
 
+    @pytest.mark.smoke("driver")
+    def test_smoke_title(self):
+        self.driver.get("https://app.smart-crm.ro/login")
+        assert "SMART CRM" in self.driver.title
 
-
-
-    '''@pytest.mark.smoke
-    def test_smoke_title(browser):
-        # Deschide pagina web
-        browser.get("https://app.smart-crm.ro/login")
-
-        # Verifică titlul paginii
-        assert "SMART CRM" in browser.title'''
 
