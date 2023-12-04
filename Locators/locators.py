@@ -83,7 +83,7 @@ class LocatoriPaginaSmartCrm():
     CAMP_NUMAR_SERIE_ACTIVE_ID = "serial_number"
     BUTON_SALVEAZA_ACTIVE_XPATH = "//button[@id='save-asset']"
     BUTON_ACTIUNE_ACTIVE_BUNURI_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[7]/div/div/a/i"
-    BUTON_STERGE_ACTIVE_BUNURI_XPATH = '//*[@id="row-14"]/td[7]/div/div/div/a[4]'
+    BUTON_STERGE_ACTIVE_BUNURI_XPATH = '/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[7]/div/div/div/a[4]'
     BUTON_CONFIRMARE_STERGERE_ACTIVE_BUNURI_XPATH = '//*[@id="body"]/div[7]/div/div[3]/button[1]'
 
 
