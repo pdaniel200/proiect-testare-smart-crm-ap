@@ -17,9 +17,6 @@ class ConturiBancareTransferPage:
         self.camp_cantitate_locator = LocatoriPaginaSmartCrm.CAMP_CANTITATE_ID
         self.apasa_buton_salvare_locator = LocatoriPaginaSmartCrm.BUTON_SALVARE_XPATH
 
-
-
-
     def transfera_intre_conturi(self):
         self.driver.find_element(By.XPATH, self.apasa_nume_detinator_cont_locator).click()
         self.time.sleep(2)
@@ -33,6 +30,3 @@ class ConturiBancareTransferPage:
         self.time.sleep(2)
         self.driver.find_element(By.XPATH, self.apasa_buton_salvare_locator).click()
         self.time.sleep(2)
-
-
-

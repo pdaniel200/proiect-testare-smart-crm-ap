@@ -20,9 +20,6 @@ class ConturiBancarePage:
         self.selectare_stare_cont_activ_locator = LocatoriPaginaSmartCrm.SELECTOR_STARE_CONT_ACTIV_XPATH
         self.apasa_buton_adaugare_cont_locator = LocatoriPaginaSmartCrm.BUTON_ADAUGARE_CONT_XPATH
 
-
-
-
     def adauga_cont_bancar(self):
         self.driver.find_element(By.XPATH, self.apasa_buton_finante_locator).click()
         self.time.sleep(2)

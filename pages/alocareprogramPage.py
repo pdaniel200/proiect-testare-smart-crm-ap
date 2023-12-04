@@ -33,10 +33,7 @@ class AlocareProgramPage:
         self.driver.find_element(By.XPATH, self.apasa_buton_salvare_program_locator).click()
         self.time.sleep(2)
 
-
-
     def sterge_program_angajat(self):
-
         self.driver.find_element(By.XPATH, self.apasa_buton_prima_zi_alocata_locator).click()
         self.time.sleep(2)
         self.driver.find_element(By.XPATH, self.apasa_buton_sterge_program_locator).click()

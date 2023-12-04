@@ -19,8 +19,6 @@ class AdaugaTaskPage:
         self.buton_sterge_task_locator = LocatoriPaginaSmartCrm.BUTON_STERGE_TASK_XPATH
         self.buton_confirmare_stergere_task_locator = LocatoriPaginaSmartCrm.BUTON_CONFIRMARE_STERGERE_TASK_XPATH
 
-
-
     def adauga_task_angajat(self):
         self.driver.find_element(By.XPATH, self.apasa_buton_adaugare_sarcina_locator).click()
         self.time.sleep(2)
@@ -35,7 +33,6 @@ class AdaugaTaskPage:
         self.driver.find_element(By.ID, self.buton_salvare_task_locator).click()
 
     def sterge_task_angajat(self):
-
         self.driver.find_element(By.XPATH, self.buton_actiune_la_task_locator).click()
         self.time.sleep(2)
         self.driver.find_element(By.XPATH, self.buton_sterge_task_locator).click()

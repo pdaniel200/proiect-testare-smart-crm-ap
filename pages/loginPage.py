@@ -1,10 +1,15 @@
+
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from Locators.locators import LocatoriPaginaSmartCrm
 
 
 class LoginPage:
     def __init__(self, driver):
         self.driver = driver
+        self.wait = WebDriverWait(driver, 10)
+
 
         # Locatori pagina de login
         self.username_textbox_locator = LocatoriPaginaSmartCrm.USERNAME_TEXTBOX_ID
@@ -16,6 +21,8 @@ class LoginPage:
     def enter_username(self, username):
         self.driver.find_element(By.ID, self.username_textbox_locator).clear()
         self.driver.find_element(By.ID, self.username_textbox_locator).send_keys(username)
+        #self.wait.until(EC.presence_of_element_located((By.ID, "email")))
+        #self.driver.find_element(By.ID, self.username_textbox_locator).send_keys(username)
         self.driver.find_element(By.ID, self.buton_inainte_locator).click()
 
     def enter_password(self, password):
@@ -27,5 +34,4 @@ class LoginPage:
 
     def vreificare_mesaj_parola_gresita(self):
         msg = self.driver.find_element(By.XPATH, self.mesaj_invalid_feedback_locator).text
-
         return msg

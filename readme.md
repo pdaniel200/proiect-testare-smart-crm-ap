@@ -1,4 +1,4 @@
-# Testing login, running and stopping the timer, Chrome and Firefox
+# Testing login, running and stopping the timer, creating and deleteing task and various operations on the app.smart-crm.ro webpage, Chrome and Firefox
 
 
 
@@ -17,8 +17,10 @@
 # Test execution
 
 1. Open a terminal
-2. From the project root directory run: `pytest Tests/test_login_pt.py --html=Results/report_test_login_pt.html`
-2. From the project root directory run: `pytest Tests/test_login_smart_crm.py --html=Results/report_test_login_smart_crm.html`
+2. For the version with browser configuration and headless option start:
+   From the project root directory run: `pytest Tests/test_login_smart_crm_config.py --html=Results/report_test_login_pt.html`
+3. For the version without browser configuration and headless option start:
+   From the project root directory run: `pytest Tests/test_login_smart_crm.py --html=Results/report_test_login_smart_crm.html`
 
 # You can choose a type of brower from wich yo can run the test chrome/firefox
 1. browser: chrome
@@ -36,4 +38,4 @@ To check the report, open '/results/report.html' once the test has finished.
 
 # Screenshots are taken at every major step
 
-To check the report, open '/results/
+To check the report, open '/Results/
