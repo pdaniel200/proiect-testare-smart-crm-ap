@@ -1,3 +1,7 @@
+''' 
+    Configurarea tiplului de browser si vizibilitatea acestuia
+''
+
 #alegeti un tip de browswer chrome/firefox
 browser: chrome
 
