@@ -17,7 +17,8 @@
 # Test execution
 
 1. Open a terminal
-2. From the project root directory run: `pytest -v --html=results/report.html`
+2. From the project root directory run: `pytest Tests/test_login_pt.py --html=Results/report_test_login_pt.html`
+2. From the project root directory run: `pytest Tests/test_login_smart_crm.py --html=Results/report_test_login_smart_crm.html`
 
 # You can choose a type of brower from wich yo can run the test chrome/firefox
 1. browser: chrome
