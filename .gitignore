@@ -1,6 +1,6 @@
 # Project
 .env
-Tests/test_login_smart_crm2.py
+Tests/test_login_smart_crm3.py
 
 # Python
 venv/*
