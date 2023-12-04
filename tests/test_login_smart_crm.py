@@ -20,6 +20,7 @@ from Pages.alocareprogramPage import AlocareProgramPage
 from Pages.adaugaretaskPage import AdaugaTaskPage
 from Pages.adaugarecomandafurnizorPage import AdaugaComandaFurnizorPage
 from Pages.adaugarecheltuialaPage import AdaugaCheltuialaPage
+from Pages.adaugarebunuriPage import AdaugaBunuriPage
 
 import time
 from decouple import AutoConfig
@@ -30,7 +31,7 @@ logging.basicConfig(level=logging.INFO) # seteaza nivelul de logare la INFO
 logger = logging.getLogger(__name__) # creaza un obiect logger
 
 
-class TestLoginSmartCRM(unittest.TestCase, LoginPage, DashboardPage, ConturiBancarePage, ConturiBancareTransferPage, AlocareProgramPage, AdaugaTaskPage, AdaugaComandaFurnizorPage, AdaugaCheltuialaPage):
+class TestLoginSmartCRM(unittest.TestCase, LoginPage, DashboardPage, ConturiBancarePage, ConturiBancareTransferPage, AlocareProgramPage, AdaugaTaskPage, AdaugaComandaFurnizorPage, AdaugaCheltuialaPage, AdaugaBunuriPage):
     driver = webdriver.Chrome()
 
     def __init__(self, methodName: str = ...):
@@ -44,7 +45,7 @@ class TestLoginSmartCRM(unittest.TestCase, LoginPage, DashboardPage, ConturiBanc
         cls.PASSWORD = config('PAROLA')
         cls.PAROLA_GRESITA = config('PAROLA_GRESITA')
 
-        # Inițializați o instanță Chrome WebDriver
+        # Initializare o instanta Chrome WebDriver
         #cls.driver = webdriver.Chrome()
         # Seteaza asteptarea implicita
         cls.driver.implicitly_wait(10)
@@ -62,6 +63,7 @@ class TestLoginSmartCRM(unittest.TestCase, LoginPage, DashboardPage, ConturiBanc
         cls.adaugaretask_page = AdaugaTaskPage(cls.driver)
         cls.adaugarecomandafurnizor_page = AdaugaComandaFurnizorPage(cls.driver)
         cls.adaugarecheltuiala_page = AdaugaCheltuialaPage(cls.driver)
+        cls.adaugarebunuri_page = AdaugaBunuriPage(cls.driver)
 
 
     @classmethod
@@ -171,16 +173,24 @@ class TestLoginSmartCRM(unittest.TestCase, LoginPage, DashboardPage, ConturiBanc
 
 
     def test_i_adaugare_bunuri(self):
-        pass
-
-
+        self.adaugarebunuri_page.adauga_active_bunuri()
+        time.sleep(2)
+        self.adaugarebunuri_page.driver.save_screenshot("Results/test_i_adaugare_bunuri.png")
+        # scrie in log ca testul a fost efectuat cu succes
+        logger.info("Test adaugare bunuri - Efectuat cu succes.")
+        time.sleep(2)
+        self.adaugarebunuri_page.sterge_active_bunuri()
+        time.sleep(2)
+        # scrie in log ca testul a fost efectuat cu succes
+        logger.info("Test stergere bunuri - Efectuat cu succes.")
+        time.sleep(2)
 
     def test_j_iesire_cont(self):
         # Efectuați pașii de deconectare
         self.dashboard_page.iesire_cont()
         time.sleep(2)
 
-        # Log information about the successful completion of the test
+        # scrie in log ca testul a fost efectuat cu succes
         logger.info("Testare iesire din cont - Iesirea din cont a fost efectuata cu succes.")
 
     def test_k_login_invalid_password(self):
@@ -196,7 +206,7 @@ class TestLoginSmartCRM(unittest.TestCase, LoginPage, DashboardPage, ConturiBanc
         # Salvați o captură de ecran a paginii de conectare cu mesajul parola greșită
         self.login_page.driver.save_screenshot("Results/test_login_invalid_pass.png")
         time.sleep(2)
-        # Log information about the successful completion of the test
+        # scrie in log ca testul a fost efectuat cu succes
         logger.info("Testare Pagina Login - Test login si returnare mesaj a fost efectuat cu succes.")
 
 

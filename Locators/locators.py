@@ -74,6 +74,18 @@ class LocatoriPaginaSmartCrm():
     SELECTEAZA_ANGAJAT_1_XPATH = '/html/body/div[6]/div/div/div/div/form/div/div[1]/div[6]/div/div/div/div[2]/ul/li[2]/a'
     BUTON_SALVARE_CHELTUIALA_XPATH = "//button[@id='save-expense-form']"
 
+    #locatori adaugare stergere bunuri
+    BUTON_MENIU_ACHIZITII_BUNURI_XPATH = "//span[normalize-space()='Active | Bunuri']"
+    BUTON_ADAUGARE_ACTIVE_XPATH = '//*[@id="table-actions"]/a'
+    CAMP_DENUMIRE_BUN_ID = "name"
+    SELECTOR_TIP_ACTIVE_XPATH = '//*[@id="save-asset-form"]/div/div[1]/div[1]/div/div[2]/div/div[1]/button'
+    SELECTEAZA_TIP_ACTIVE_XPATH = "//span[normalize-space()='scule si unelte']"
+    CAMP_NUMAR_SERIE_ACTIVE_ID = "serial_number"
+    BUTON_SALVEAZA_ACTIVE_XPATH = "//button[@id='save-asset']"
+    BUTON_ACTIUNE_ACTIVE_BUNURI_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[7]/div/div/a/i"
+    BUTON_STERGE_ACTIVE_BUNURI_XPATH = '//*[@id="row-14"]/td[7]/div/div/div/a[4]'
+    BUTON_CONFIRMARE_STERGERE_ACTIVE_BUNURI_XPATH = '//*[@id="body"]/div[7]/div/div[3]/button[1]'
+
 
 
     #locatori pagina de logout

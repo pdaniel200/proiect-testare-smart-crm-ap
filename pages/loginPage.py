@@ -1,4 +1,3 @@
-
 from selenium.webdriver.common.by import By
 from Locators.locators import LocatoriPaginaSmartCrm
 
@@ -7,8 +6,7 @@ class LoginPage:
     def __init__(self, driver):
         self.driver = driver
 
-
-        # Locators
+        # Locatori pagina de login
         self.username_textbox_locator = LocatoriPaginaSmartCrm.USERNAME_TEXTBOX_ID
         self.password_textbox_locator = LocatoriPaginaSmartCrm.PASSWORD_TEXTBOX_ID
         self.buton_inainte_locator = LocatoriPaginaSmartCrm.BUTON_INAINTE_ID
