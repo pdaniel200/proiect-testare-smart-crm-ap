@@ -2,4 +2,4 @@
 browser: chrome
 
 #Vizibilitate browser la rularea testului True/False
-headless: True
+headless: False

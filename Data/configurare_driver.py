@@ -1,9 +1,14 @@
+''' Modul pentru configurarea driverului de browser
+    Acest modul este folosit pentru a configura driverul de browser
+    in functie de parametrii din fisierul de configurare config.yaml
+'''
+
+
 # Importare module necesare
 import os
 import warnings
 from pathlib import Path
 
-import pytest
 import yaml
 
 from selenium import webdriver
@@ -17,7 +22,6 @@ from webdriver_manager.firefox import GeckoDriverManager
 # configurare nivel de log pentru webdriver manager
 os.environ['WDM_LOG_LEVEL'] = '0'
 
-
 # functie pentru citire configurație din config.yaml
 def config():
     path = Path(__file__).parent / "../Data/config.yaml"
@@ -29,8 +33,7 @@ def config():
         config_file.close()
 
 
-# clasa de baza pentru teste
-
+# clasa configurare driver
 class ConfigurareDriver:
     @staticmethod
     def initializare_driver():
@@ -57,6 +60,3 @@ class ConfigurareDriver:
             return driver
         else:
             raise Exception("Tip de browser nespecificat in config.yaml")
-
-
-

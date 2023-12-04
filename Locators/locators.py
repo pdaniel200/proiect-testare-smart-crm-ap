@@ -1,6 +1,6 @@
 ''' fisier cu locatori pentru aplicatia Smart CRM
 '''
-from selenium.webdriver.common.by import By
+
 class LocatoriPaginaSmartCrm():
 
     #locatori pagina de login
