@@ -1,3 +1,9 @@
+''' Acest modul contine metodele pentru alocarea programului de lucru pentru angajati
+    Metodele sunt:
+    - adauga_program_angajat
+    - sterge_program_angajat
+'''
+
 import time
 from selenium.webdriver.common.by import By
 from Locators.locators import LocatoriPaginaSmartCrm
@@ -38,5 +44,4 @@ class AlocareProgramPage:
         self.time.sleep(2)
         self.driver.find_element(By.XPATH, self.apasa_buton_sterge_program_locator).click()
         self.time.sleep(2)
-
 

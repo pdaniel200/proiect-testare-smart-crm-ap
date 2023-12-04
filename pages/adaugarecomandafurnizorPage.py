@@ -1,3 +1,9 @@
+''' Clasa AdaugaComandaFurnizorPage contine metodele necesare pentru a adauga o comanda furnizor
+    in aplicatie.
+    Metodele sunt:
+    - adauga_comanda_furnizor
+'''
+
 import time
 from selenium.webdriver.common.by import By
 from Locators.locators import LocatoriPaginaSmartCrm

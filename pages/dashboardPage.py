@@ -1,3 +1,10 @@
+''' Clasa DashboardPage contine metodele necesare pentru a porni cronometrul, a opri cronometrul si a iesi din cont
+    Metodele sunt:
+    - pornire_cronometru
+    - oprire_cronometru
+    - iesire_cont
+'''
+
 import time
 from selenium.webdriver.common.by import By
 from Locators.locators import LocatoriPaginaSmartCrm
@@ -21,3 +28,4 @@ class DashboardPage:
         self.driver.find_element(By.XPATH, self.oprire_cronometru_locator).click()
     def iesire_cont(self):
         self.driver.find_element(By.XPATH, self.buton_logout_locator).click()
+

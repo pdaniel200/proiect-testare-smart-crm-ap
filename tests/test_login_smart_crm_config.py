@@ -1,16 +1,14 @@
 ''' fisier de rulari teste
-    pentru rularea testelor se foloseste comanda: pytest Tests/test_login_smart_crm.py --html=Results/report_test_login_smart_crm.html
-
+    pentru rularea testelor se foloseste comanda:
+    pytest Tests/test_login_smart_crm_config.py --html=Results/report_test_login_smart_crm.html
     pentru rularea testelor cu marcarea smoke se foloseste comanda:
     pytest -k smoke --html=Results/report_test_smoke.html Tests/test_login_smart_crm.py
 '''
 
 import unittest
-import yaml
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
 
 from Pages.dashboardPage import DashboardPage
 from Pages.loginPage import LoginPage
@@ -31,7 +29,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from Data.configurare_driver import ConfigurareDriver
 
-
 # Configurare log
 logging.basicConfig(level=logging.INFO) # seteaza nivelul de logare la INFO
 logger = logging.getLogger(__name__) # creaza un obiect logger
@@ -39,9 +36,6 @@ logger = logging.getLogger(__name__) # creaza un obiect logger
 
 class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, DashboardPage, ConturiBancarePage, ConturiBancareTransferPage, AlocareProgramPage, AdaugaTaskPage, AdaugaComandaFurnizorPage, AdaugaCheltuialaPage, AdaugaBunuriPage):
     wait = None # variabila pentru asteptare
-
-    # driver = webdriver.Chrome()
-
 
     def __init__(self, methodName: str = ...):
         super().__init__(methodName)
@@ -51,14 +45,10 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
     def setup_class(cls): # metoda care se executa inainte de rularea tuturor testelor din clasa
         cls.driver = ConfigurareDriver.initializare_driver()  # initializare driver
 
-
-
         config = AutoConfig(search_path='.') # cauta fisierul .env in directorul curent
         cls.USERNAME = config('MAIL_UTILIZATOR')
         cls.PASSWORD = config('PAROLA')
         cls.PAROLA_GRESITA = config('PAROLA_GRESITA')
-
-
 
         # Creeaza instante pentru clasele LoginPage, DashboardPage si restul paginilor
         cls.login_page = LoginPage(cls.driver)
@@ -71,7 +61,6 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         cls.adaugarecomandafurnizor_page = AdaugaComandaFurnizorPage(cls.driver)
         cls.adaugarecheltuiala_page = AdaugaCheltuialaPage(cls.driver)
         cls.adaugarebunuri_page = AdaugaBunuriPage(cls.driver)
-
 
     @classmethod
     def teardown_class(cls): # metoda care se executa dupa rularea tuturor testelor din clasa
@@ -87,9 +76,6 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         time.sleep(3)
         self.login_page.click_login()
         time.sleep(3)
-
-
-
 
     def test_b_contorizare_timp(self):
         # Aceseaza pagina de sarcini din cadrul aplicatiei
@@ -121,14 +107,12 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test adaugare cont bancar - Efectuat cu succes.")
 
-
     def test_d_transfer_intre_conturi(self):
         self.conturibancaretransfer_page.transfera_intre_conturi()
         time.sleep(2)
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Testare transfer intre conturi bancare - Efectuat cu succes.")
         self.conturibancaretransfer_page.driver.save_screenshot("Results/test_d_transfer_intre_conturi.png")
-
 
     def test_e_alocare_program_angajat(self):
         self.alocareprogram_page.adauga_program_angajat()
@@ -141,7 +125,6 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test stergere program angajat - Efectuat cu succes.")
         time.sleep(2)
-
 
     def test_f_adaugare_task(self):
         # Aceseaza pagina de sarcini din cadrul aplicatiei
@@ -158,8 +141,6 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test stergere task - Efectuat cu succes.")
 
-
-
     def test_g_adaugare_comanda_furnizor(self):
         self.adaugarecomandafurnizor_page.adauga_comanda_furnizor()
         time.sleep(2)
@@ -168,7 +149,6 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         logger.info("Test adaugare comanda furnizor - Efectuat cu succes.")
         time.sleep(2)
 
-
     def test_h_adaugare_cheltuiala(self):
         self.adaugarecheltuiala_page.adauga_cheltuiala()
         time.sleep(2)
@@ -176,7 +156,6 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test adaugare cheltuiala - Efectuat cu succes.")
         time.sleep(2)
-
 
     def test_i_adaugare_bunuri(self):
         self.adaugarebunuri_page.adauga_active_bunuri()
@@ -215,13 +194,10 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Testare Pagina Login - Test login si returnare mesaj a fost efectuat cu succes.")
 
-
-
     @pytest.mark.smoke("driver") # marcarea testului ca smoke
     def test_smoke_title(self):
         self.driver.get("https://app.smart-crm.ro/login")
         assert "SMART CRM" in self.driver.title
 
-
-'''if __name__ == '__main__': # ruleaza testele din clasa
-    unittest.main()'''
+if __name__ == '__main__': # ruleaza testele din clasa
+    unittest.main()

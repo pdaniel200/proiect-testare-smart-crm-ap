@@ -1,3 +1,8 @@
+''' Pagina conturi bancare transfer
+    Metodele sunt:
+    - transfera_intre_conturi
+'''
+
 import time
 from selenium.webdriver.common.by import By
 from Locators.locators import LocatoriPaginaSmartCrm
@@ -30,3 +35,4 @@ class ConturiBancareTransferPage:
         self.time.sleep(2)
         self.driver.find_element(By.XPATH, self.apasa_buton_salvare_locator).click()
         self.time.sleep(2)
+

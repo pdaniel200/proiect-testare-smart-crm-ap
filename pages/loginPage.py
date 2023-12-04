@@ -1,3 +1,10 @@
+''' Clasa LoginPage contine metodele necesare pentru a interactiona cu elementele de pe pagina de login
+    Metodele sunt:
+    - enter_username
+    - enter_password
+    - click_login
+    - vreificare_mesaj_parola_gresita
+'''
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -35,3 +42,4 @@ class LoginPage:
     def vreificare_mesaj_parola_gresita(self):
         msg = self.driver.find_element(By.XPATH, self.mesaj_invalid_feedback_locator).text
         return msg
+

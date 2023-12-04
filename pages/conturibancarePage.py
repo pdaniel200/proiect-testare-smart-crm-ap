@@ -1,3 +1,8 @@
+''' Clasa conturibancarePage contine metodele necesare pentru a adauga un cont bancar in aplicatie
+    Metodele sunt:
+    - adauga_cont_bancar
+'''
+
 import time
 from selenium.webdriver.common.by import By
 from Locators.locators import LocatoriPaginaSmartCrm

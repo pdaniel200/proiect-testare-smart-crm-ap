@@ -1,3 +1,10 @@
+''' Clasa AdaugaBunuriPage contine metodele necesare pentru adaugarea si stergerea de active/bunuri
+    din cadrul aplicatiei SmartCrm.
+    Metodele sunt:
+    - adauga_active_bunuri
+    - sterge_active_bunuri
+'''
+
 import time
 from selenium.webdriver.common.by import By
 from Locators.locators import LocatoriPaginaSmartCrm
@@ -8,7 +15,7 @@ class AdaugaBunuriPage:
         self.driver = driver
         self.time = time
 
-        # Locatori adaugare cheltuiala
+        # Locatori adaugare cheltuieli
         self.apasa_buton_meniu_achiziitii_locator = LocatoriPaginaSmartCrm.BUTON_MENIU_ACHIZITII_BUNURI_XPATH
         self.apasa_buton_adaugare_active_locator = LocatoriPaginaSmartCrm.BUTON_ADAUGARE_ACTIVE_XPATH
         self.camp_denumire_bun_locator = LocatoriPaginaSmartCrm.CAMP_DENUMIRE_BUN_ID
@@ -43,3 +50,4 @@ class AdaugaBunuriPage:
         self.time.sleep(2)
         self.driver.find_element(By.XPATH, self.buton_confirmare_stergere_active_bunuri_locator).click()
         self.time.sleep(2)
+

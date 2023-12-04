@@ -1,3 +1,8 @@
+''' Clasa AdaugaCheltuialaPage contine metodele necesare pentru a adauga o cheltuiala in aplicatie.
+    Metodele sunt:
+    - adauga_cheltuiala
+'''
+
 import time
 from selenium.webdriver.common.by import By
 from Locators.locators import LocatoriPaginaSmartCrm
@@ -35,3 +40,4 @@ class AdaugaCheltuialaPage:
         self.time.sleep(2)
         self.driver.find_element(By.XPATH, self.buton_salvare_cheltuiala_locator).click()
         self.time.sleep(2)
+

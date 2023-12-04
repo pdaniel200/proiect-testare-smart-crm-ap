@@ -1,3 +1,9 @@
+''' Clasa AdaugaTaskPage contine metodele necesare pentru adaugarea unui task de catre un angajat
+    Metodele sunt:
+    - adauga_task_angajat
+    - sterge_task_angajat
+'''
+
 import time
 from selenium.webdriver.common.by import By
 from Locators.locators import LocatoriPaginaSmartCrm
@@ -39,7 +45,4 @@ class AdaugaTaskPage:
         self.time.sleep(2)
         self.driver.find_element(By.XPATH, self.buton_confirmare_stergere_task_locator).click()
         self.time.sleep(2)
-
-
-
 
