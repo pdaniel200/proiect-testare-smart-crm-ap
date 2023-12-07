@@ -1,6 +1,6 @@
 ''' fisier de rulari teste
     pentru rularea testelor se foloseste comanda:
-    pytest Tests/test_login_smart_crm_config.py --html=Results/report_test_login_smart_crm.html
+    pytest Tests/test_login_smart_crm_config.py --html=Results/report_test_login_smart_crm_config.html
     pentru rularea testelor cu marcarea smoke se foloseste comanda:
     pytest -k smoke --html=Results/report_test_smoke.html Tests/test_login_smart_crm.py
 '''
@@ -67,7 +67,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         cls.driver.quit()
 
     def test_a_login_valid(self):
-        # Efectuați pașii de conectare
+        # Efectuare pasii de conectare
         self.login_page.driver.get("https://app.smart-crm.ro/login")
         self.login_page.enter_username(self.USERNAME) # introducere username
         time.sleep(3)
@@ -80,14 +80,14 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
     def test_b_contorizare_timp(self):
         # Aceseaza pagina de sarcini din cadrul aplicatiei
         self.dashboard_page.driver.get("https://app.smart-crm.ro/account/tasks")
-        # scrie in log ca testul a fost efectuat cu succes
+        # Scrie in log ca testul a fost efectuat cu succes
         logger.info("Test Pagina Login - Logarea cu o parola valida a fost efectuata cu succes.")
         time.sleep(4)
         # Începeți funcționalitatea de cronometrare pe pagina de sarcini
         self.dashboard_page.pornire_cronometru()
         # Salveaza o captura de ecran dupa oprirea cronometrului
         self.dashboard_page.driver.save_screenshot("Results/test_b_contor_pornit.png")
-        # scrie in log ca testul a fost efectuat cu succes
+        # Scrie in log ca testul a fost efectuat cu succes
         logger.info("Testare Pagina Sarcini - Pornire cronometru efectuat cu succes.")
         time.sleep(6)
 
