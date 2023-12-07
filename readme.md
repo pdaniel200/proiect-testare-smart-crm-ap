@@ -1,4 +1,4 @@
-# Testing login, running and stopping the timer, creating and deleteing task and various operations on the app.smart-crm.ro webpage, Chrome and Firefox
+# Testing login, running and stopping the timer, creating and deleteing task and various operations on the app.smart-crm.ro webpage, Chrome, Firefox and Edge
 
 
 
@@ -22,11 +22,12 @@
 3. For the version with default chromedriver start:
    From the project root directory run: `pytest Tests/test_login_smart_crm.py --html=Results/report_test_login_smart_crm.html`
 
-# You can choose a type of brower from wich yo can run the test chrome/firefox
+# You can choose a type of brower from wich yo can run the test chrome/firefox/edge
 1. browser: chrome
 2. browser: firefox
+3. browser: edge
 
-The tests will be executed in Chrome but can be modified in the "/data/config.yaml" file to also be executed in Firefox
+The tests will be executed in Chrome but can be modified in the "/data/config.yaml" file to also be executed in Firefox or Edge
 
 # Browser visibility when running the test: True or False
 1. headless: False - the browser will be visible while executing the test
