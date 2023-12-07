@@ -17,9 +17,9 @@
 # Test execution
 
 1. Open a terminal
-2. For the version with browser configuration and headless option start:
+2. For the version wich takes in consideration the config.yaml options to setup the browser type and the headless option start:
    From the project root directory run: `pytest Tests/test_login_smart_crm_config.py --html=Results/report_test_login_pt.html`
-3. For the version without browser configuration and headless option start:
+3. For the version with default chromedriver start:
    From the project root directory run: `pytest Tests/test_login_smart_crm.py --html=Results/report_test_login_smart_crm.html`
 
 # You can choose a type of brower from wich yo can run the test chrome/firefox
