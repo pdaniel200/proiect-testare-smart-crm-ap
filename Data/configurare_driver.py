@@ -11,7 +11,7 @@ from pathlib import Path
 import yaml
 
 from selenium import webdriver
-from selenium.webdriver.support.wait import WebDriverWait
+# from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.service import Service as ServiceChrome
 from selenium.webdriver.firefox.service import Service as ServiceFirefox
 
@@ -21,7 +21,7 @@ from selenium.webdriver.edge.options import Options as OptionsEdge
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-from webdriver_manager.microsoft import IEDriverManager
+# from webdriver_manager.microsoft import IEDriverManager
 
 # configurare nivel de log pentru webdriver manager
 os.environ['WDM_LOG_LEVEL'] = '0'
