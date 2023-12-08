@@ -3,11 +3,9 @@
 
 
 # Version
-
 * Python 3.10
 
 # Run
-
 1. Open a terminal
 2. Go to the root directory of the project "/ap-testing-project/".
 3. Create a virtual environment: `py -m venv venv`
@@ -15,7 +13,6 @@
 5. Download the required libraries: `pip install -r requirements.txt`
 
 # Test execution
-
 1. Open a terminal
 2. For the version wich takes in consideration the config.yaml options to setup the browser type and the headless option start:
    From the project root directory run: `pytest Tests/test_login_smart_crm_config.py --html=Results/report_test_login_pt.html`
@@ -33,10 +30,12 @@ The tests will be executed in Chrome but can be modified in the "/data/config.ya
 1. headless: False - the browser will be visible while executing the test
 2. headless: True - the browser will not be visible while executing the test.
 
-# Results
+# Option to test with the local webdriver or remote with WebDriver Manager
+1. webdriver: local - the webdriver will be launched from the drvweb folder
+2. webdriver: remote - the webdriver will be installed by WebDriver Manager
 
+# Results
 To check the report, open '/results/report.html' once the test has finished.
 
 # Screenshots are taken at every major step
-
 To check the report, open '/Results/
