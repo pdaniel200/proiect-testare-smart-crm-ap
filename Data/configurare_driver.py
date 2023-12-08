@@ -70,7 +70,7 @@ class ConfigurareDriver:
             driver.maximize_window()
             return driver
         elif config()['browser'] == 'edge':
-            options = webdriver.EdgeOptions()
+            options = OptionsEdge()
             if config()['headless']:  # adaugare opțiuni pentru mod fara interfata grafica la browserul firefox
                 options.add_argument('--headless')
                 options.add_argument('--no-sandbox')
@@ -81,9 +81,9 @@ class ConfigurareDriver:
                 edge_service = ServiceEdge(edge_driver_path)
             else:
                 edge_service = ServiceEdge(EdgeChromiumDriverManager().install())
-            edge_options = OptionsEdge()
-            driver = webdriver.Edge(service=edge_service, options=edge_options)
+            driver = webdriver.Edge(service=edge_service, options=options)
             driver.maximize_window()
             return driver
         else:
             raise Exception("Tip de browser nespecificat in config.yaml")
+

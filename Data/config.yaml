@@ -1,10 +1,10 @@
 #Configurarea tiplului de browser si vizibilitatea acestuia
 
 #alegeti un tip de browswer chrome/firefox/edge
-browser: chrome
+browser: edge
 
 #Vizibilitate browser la rularea testului True/False
 headless: False
 
 # webdriver local sau remote
-webdriver: remote
+webdriver: local
