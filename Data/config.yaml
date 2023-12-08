@@ -4,7 +4,7 @@
 browser: edge
 
 #Vizibilitate browser la rularea testului True/False
-headless: False
+headless: True
 
 # webdriver local sau remote
-webdriver: local
+webdriver: remote

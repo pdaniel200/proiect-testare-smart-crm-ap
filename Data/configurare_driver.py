@@ -38,15 +38,16 @@ def config():
 class ConfigurareDriver:
     @staticmethod
     def initializare_driver():
+        '''Metoda pentru initializarea driverului de browser'''
         warnings.simplefilter("ignore", ResourceWarning)
-        if config()['browser'] == 'chrome':
+        if config()['browser'] == 'chrome': # verificare tip de browser
             options = webdriver.ChromeOptions()
-            if config()['headless']:  # adaugare opțiuni pentru mod fara interfata grafica
+            if config()['headless']:  # adaugare opțiuni pentru mod fara interfata grafica la browserul chrome
                 options.add_argument('--headless')
                 options.add_argument('--no-sandbox')
                 options.add_argument('--disable-gpu')
                 options.add_argument('--window-size=1920,1080')
-            if config()['webdriver'] == 'local':
+            if config()['webdriver'] == 'local': # verificare tip de driver
                 chrome_driver_path = Path(__file__).parent / "../drvweb/chromedriver.exe"
                 chrome_service = ServiceChrome(chrome_driver_path)
             else:
@@ -54,14 +55,14 @@ class ConfigurareDriver:
             driver = webdriver.Chrome(service=chrome_service, options=options)
             driver.maximize_window()
             return driver
-        elif config()['browser'] == 'firefox':
+        elif config()['browser'] == 'firefox': # verificare tip de browser
             options = webdriver.FirefoxOptions()
             if config()['headless']:  # adaugare opțiuni pentru mod fara interfata grafica la browserul firefox
                 options.add_argument('--headless')
                 options.add_argument('--no-sandbox')
                 options.add_argument('--disable-gpu')
                 options.add_argument('--window-size=1920,1080')
-            if config()['webdriver'] == 'local':
+            if config()['webdriver'] == 'local': # verificare tip de driver
                 firefox_driver_path = Path(__file__).parent / "../drvweb/geckodriver.exe"
                 firefox_service = ServiceFirefox(firefox_driver_path)
             else:
@@ -69,14 +70,14 @@ class ConfigurareDriver:
             driver = webdriver.Firefox(service=firefox_service, options=options)
             driver.maximize_window()
             return driver
-        elif config()['browser'] == 'edge':
+        elif config()['browser'] == 'edge': # verificare tip de browser
             options = OptionsEdge()
-            if config()['headless']:  # adaugare opțiuni pentru mod fara interfata grafica la browserul firefox
+            if config()['headless']:  # adaugare opțiuni pentru mod fara interfata grafica la browserul edge
                 options.add_argument('--headless')
                 options.add_argument('--no-sandbox')
                 options.add_argument('--disable-gpu')
                 options.add_argument('--window-size=1920,1080')
-            if config()['webdriver'] == 'local':
+            if config()['webdriver'] == 'local': # verificare tip de driver
                 edge_driver_path = Path(__file__).parent / "../drvweb/msedgedriver.exe"
                 edge_service = ServiceEdge(edge_driver_path)
             else:
@@ -85,5 +86,5 @@ class ConfigurareDriver:
             driver.maximize_window()
             return driver
         else:
-            raise Exception("Tip de browser nespecificat in config.yaml")
+            raise Exception("Tip de browser nespecificat in config.yaml") # eroare daca tipul de browser nu este specificat in fisierul de configurare
 
