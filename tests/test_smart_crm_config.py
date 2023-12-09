@@ -1,8 +1,8 @@
 ''' fisier de rulari teste
     pentru rularea testelor se foloseste comanda:
-    pytest Tests/test_login_smart_crm_config.py --html=Results/report_test_login_smart_crm_config.html
+    pytest Tests/test_smart_crm_config.py --html=Results/report_test_smart_crm_config.html
     pentru rularea testelor cu marcarea smoke se foloseste comanda:
-    pytest -k smoke --html=Results/report_test_smoke.html Tests/test_login_smart_crm.py
+    pytest -k smoke --html=Results/report_test_smoke.html Tests/test_smart_crm_config.py
 '''
 
 import unittest
@@ -24,7 +24,6 @@ import time
 from decouple import AutoConfig
 import logging
 
-# Importa pentru configurare driver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from Data.configurare_driver import ConfigurareDriver
@@ -90,7 +89,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         # Începeți funcționalitatea de cronometrare pe pagina de sarcini
         self.dashboard_page.pornire_cronometru()
         # Salveaza o captura de ecran dupa oprirea cronometrului
-        self.dashboard_page.driver.save_screenshot("Results/test_b_contor_pornit.png")
+        self.dashboard_page.driver.save_screenshot("Results/test_b_contor_oprit.png")
         # Scrie in log ca testul a fost efectuat cu succes
         logger.info("Testare Pagina Sarcini - Pornire cronometru efectuat cu succes.")
         time.sleep(6)
@@ -99,7 +98,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         self.dashboard_page.oprire_cronometru()
 
         # Salveaza o captura de ecran dupa oprirea cronometrului
-        self.dashboard_page.driver.save_screenshot("Results/test_b_contor_oprit.png")
+        self.dashboard_page.driver.save_screenshot("Results/test_b_contor_pornit.png")
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test Pagina Sarcini - Oprire cronometru efectuat cu succes.")
         time.sleep(6)
