@@ -50,7 +50,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         cls.USERNAME = config('MAIL_UTILIZATOR')
         cls.PASSWORD = config('PAROLA')
         cls.PAROLA_GRESITA = config('PAROLA_GRESITA')
-
+        cls.wait = WebDriverWait(cls.driver, 10) # seteaza timpul de asteptare la 10 secunde
         # Creeaza instante pentru clasele LoginPage, DashboardPage si restul paginilor
         cls.login_page = LoginPage(cls.driver)
         cls.dashboard_page = DashboardPage(cls.driver)
@@ -206,10 +206,15 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Testare Pagina Login - Test login si returnare mesaj a fost efectuat cu succes.")
 
+    @pytest.disable() # test dezactivat
+    def test_titlu_pg_principala(self):
+        self.driver.get("https://smart-crm.ro/")
+        assert "Smart CRM" in self.driver.title
+
     @pytest.mark.smoke("driver") # marcarea testului ca smoke
     def test_smoke_title(self):
         self.driver.get("https://app.smart-crm.ro/login")
         assert "SMART CRM" in self.driver.title
 
-if __name__ == '__main__': # ruleaza testele din clasa
+if __name__ == '__main__': # rulare test in mod standalone
     unittest.main()
