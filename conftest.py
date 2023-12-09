@@ -13,6 +13,7 @@ def pytest_addoption(parser):
     )
 
 def pytest_configure(config):
+    """functie utilizata pentru a configura pytest."""
     # Verifica daca o cale htmlpath a fost furnizata ca argument de linie de comanda
     html_report_path = config.getoption("--htmlpath")
     # Daca nu a fost furnizata o cale htmlpath, genereaza un nume de fisier implicit

@@ -38,7 +38,8 @@ def config():
 class ConfigurareDriver:
     @staticmethod
     def initializare_driver():
-        '''Metoda pentru initializarea driverului de browser'''
+        '''Metoda pentru initializarea driverului de browser in functie de parametrii din fisierul de configurare config.yaml
+        '''
         warnings.simplefilter("ignore", ResourceWarning)
         if config()['browser'] == 'chrome': # verificare tip de browser
             options = webdriver.ChromeOptions()
