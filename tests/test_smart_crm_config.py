@@ -42,7 +42,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         self.title = None
 
     @classmethod
-    def setup_class(cls):
+    def setUpClass(cls):
         '''Metoda care se executa inainte de rularea tuturor testelor din clasa'''
         cls.driver = ConfigurareDriver.initializare_driver()  # initializare driver
 
@@ -50,7 +50,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         cls.USERNAME = config('MAIL_UTILIZATOR')
         cls.PASSWORD = config('PAROLA')
         cls.PAROLA_GRESITA = config('PAROLA_GRESITA')
-        cls.wait = WebDriverWait(cls.driver, 10) # seteaza timpul de asteptare la 10 secunde
+        cls.wait = WebDriverWait(cls.driver, 10) # seteaza timpul de asteptare la 10 secunde pentru elementele din pagina
         # Creeaza instante pentru clasele LoginPage, DashboardPage si restul paginilor
         cls.login_page = LoginPage(cls.driver)
         cls.dashboard_page = DashboardPage(cls.driver)
@@ -64,7 +64,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         cls.adaugarebunuri_page = AdaugaBunuriPage(cls.driver)
 
     @classmethod
-    def teardown_class(cls):
+    def tearDownClass(cls):
         '''Metoda care se executa dupa rularea tuturor testelor din clasa'''
         cls.driver.quit()
 
@@ -206,12 +206,14 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Testare Pagina Login - Test login si returnare mesaj a fost efectuat cu succes.")
 
-    @pytest.disable() # test dezactivat
+
+
+    @pytest.mark.skip(reason="Nu mai este necesar")
     def test_titlu_pg_principala(self):
         self.driver.get("https://smart-crm.ro/")
         assert "Smart CRM" in self.driver.title
 
-    @pytest.mark.smoke("driver") # marcarea testului ca smoke
+    @pytest.mark.smoke() # marcarea testului ca smoke
     def test_smoke_title(self):
         self.driver.get("https://app.smart-crm.ro/login")
         assert "SMART CRM" in self.driver.title
