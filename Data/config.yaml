@@ -1,7 +1,7 @@
 #Configurarea tiplului de browser si vizibilitatea acestuia
 
 #alegeti un tip de browswer chrome/firefox/edge
-browser: edge
+browser: firefox
 
 #Vizibilitate browser la rularea testului True/False
 headless: True
