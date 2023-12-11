@@ -108,6 +108,8 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         self.conturibancare_page.adauga_cont_bancar()
         time.sleep(2)
         self.conturibancare_page.driver.save_screenshot("Results/test_c_adaugare_cont_bancar.png")
+        time.sleep(1)
+        self.conturibancare_page.sterge_cont_bancar()
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test adaugare cont bancar - Efectuat cu succes.")
 
@@ -153,6 +155,8 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         self.adaugarecomandafurnizor_page.adauga_comanda_furnizor()
         time.sleep(2)
         self.adaugarecomandafurnizor_page.driver.save_screenshot("Results/test_g_adaugare_comanda_furnizor.png")
+        time.sleep(2)
+        self.adaugarecomandafurnizor_page.sterge_comanda_furnizor()
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test adaugare comanda furnizor - Efectuat cu succes.")
         time.sleep(2)
@@ -162,6 +166,8 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         self.adaugarecheltuiala_page.adauga_cheltuiala()
         time.sleep(2)
         self.adaugarecheltuiala_page.driver.save_screenshot("Results/test_h_adaugare_cheltuiala.png")
+        time.sleep(1)
+        self.adaugarecheltuiala_page.sterge_cheltuiala()
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test adaugare cheltuiala - Efectuat cu succes.")
         time.sleep(2)
@@ -189,24 +195,31 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Testare iesire din cont - Iesirea din cont a fost efectuata cu succes.")
 
+
     def test_k_login_invalid_password(self):
-        '''Metoda care efectueaza testarea paginii de login cu o parola invalida'''
-        # Efectuați pașii de conectare
-        self.login_page.enter_username(self.USERNAME)
-        time.sleep(2)
-        self.login_page.enter_password(self.PAROLA_GRESITA)
-        time.sleep(1)
-        self.login_page.click_login()
-        message = self.driver.find_element(By.XPATH, self.mesaj_invalid_feedback_locator).text
-        self.assertEqual(message, "Aceste acreditări nu se potrivesc cu înregistrările noastre.")
-        time.sleep(1)
-        # Salvați o captură de ecran a paginii de conectare cu mesajul parola greșită
-        self.login_page.driver.save_screenshot("Results/test_j_login_invalid_pass.png")
-        time.sleep(2)
-        # scrie in log ca testul a fost efectuat cu succes
-        logger.info("Testare Pagina Login - Test login si returnare mesaj a fost efectuat cu succes.")
-
-
+        '''Metoda care efectueaza testarea paginii de login cu o parola invalida - try - except - else
+        '''
+        try:
+            # Aceseaza pagina de login si introduce datele de conectare
+            self.login_page.enter_username(self.USERNAME)
+            time.sleep(2)
+            self.login_page.enter_password(self.PAROLA_GRESITA)
+            time.sleep(1)
+            self.login_page.click_login()
+            message = self.driver.find_element(By.XPATH, self.mesaj_invalid_feedback_locator).text
+            # Verifica daca mesajul de eroare este cel asteptat
+            self.assertEqual(message, "Aceste acreditări nu se potrivesc cu înregistrările noastre.")
+            time.sleep(1)
+            # Salveaza o captura de ecran a paginii de conectare cu mesajul parola gresita
+            self.login_page.driver.save_screenshot("Results/test_j_login_invalid_pass.png")
+            time.sleep(2)
+        except AssertionError as e:
+            # In caz de eroare, scrie in log ca testul a esuat
+            logger.error(f"Testare Pagina Login - Test login și returnare mesaj a eșuat: {str(e)}")
+            raise  # Re-raise the assertion error to mark the test as failed
+        else:
+            # Scrie in log ca testul a fost efectuat cu succes
+            logger.info("Testare Pagina Login - Test login și returnare mesaj a fost efectuat cu succes.")
 
     @pytest.mark.skip(reason="Nu mai este necesar")
     def test_titlu_pg_principala(self):

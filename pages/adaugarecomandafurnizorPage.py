@@ -25,6 +25,10 @@ class AdaugaComandaFurnizorPage:
         self.camp_cantitate_locator = LocatoriPaginaSmartCrm.CAMP_CANTITATE_PRODUS_XPATH
         self.buton_salvare_comanda_locator = LocatoriPaginaSmartCrm.BUTON_SALVARE_COMANDA_XPATH
         self.buton_salvare_si_marcare_trimisa_locator = LocatoriPaginaSmartCrm.BUTON_SALVARE_SI_MARCARE_TRIMISA_XPATH
+        self.buton_actiune_comanda_locator = LocatoriPaginaSmartCrm.BUTON_ACTIUNE_COMANDA_XPATH
+        self.buton_sterge_comanda_locator = LocatoriPaginaSmartCrm.BUTON_STERGE_COMANDA_XPATH
+        self.buton_confirmare_stergere_comanda_locator = LocatoriPaginaSmartCrm.BUTON_CONFIRMARE_STERGERE_COMANDA_XPATH
+
 
     def adauga_comanda_furnizor(self):
         self.driver.find_element(By.XPATH, self.apasa_buton_meniu_achizitii_locator).click()
@@ -48,3 +52,11 @@ class AdaugaComandaFurnizorPage:
         self.time.sleep(2)
         self.driver.find_element(By.XPATH, self.buton_salvare_si_marcare_trimisa_locator).click()
 
+    def sterge_comanda_furnizor(self):
+        self.time.sleep(2)
+        self.driver.find_element(By.XPATH, self.buton_actiune_comanda_locator).click()
+        self.time.sleep(2)
+        self.driver.find_element(By.XPATH, self.buton_sterge_comanda_locator).click()
+        self.time.sleep(2)
+        self.driver.find_element(By.XPATH, self.buton_confirmare_stergere_comanda_locator).click()
+        self.time.sleep(2)

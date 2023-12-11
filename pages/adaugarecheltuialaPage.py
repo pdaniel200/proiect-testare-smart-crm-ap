@@ -22,6 +22,9 @@ class AdaugaCheltuialaPage:
         self.selector_angajat_locator = LocatoriPaginaSmartCrm.SELECTOR_ANGAJAT_XPATH
         self.selecteaza_angajat_1_locator = LocatoriPaginaSmartCrm.SELECTEAZA_ANGAJAT_1_XPATH
         self.buton_salvare_cheltuiala_locator = LocatoriPaginaSmartCrm.BUTON_SALVARE_CHELTUIALA_XPATH
+        self.buton_actiune_cheltuiala_locator = LocatoriPaginaSmartCrm.BUTON_ACTIUNE_CHELTUIALA_XPATH
+        self.buton_sterge_cheltuiala_locator = LocatoriPaginaSmartCrm.BUTON_STERGE_CHELTUIALA_XPATH
+        self.buton_confirmare_stergere_cheltuiala_locator = LocatoriPaginaSmartCrm.BUTON_CONFIRMARE_STERGERE_CHELTUIALA_XPATH
 
     def adauga_cheltuiala(self):
         self.driver.find_element(By.XPATH, self.apasa_buton_meniu_finante_locator).click()
@@ -39,5 +42,12 @@ class AdaugaCheltuialaPage:
         self.driver.find_element(By.XPATH, self.selecteaza_angajat_1_locator).click()
         self.time.sleep(2)
         self.driver.find_element(By.XPATH, self.buton_salvare_cheltuiala_locator).click()
-        self.time.sleep(2)
+        self.time.sleep(3)
 
+    def sterge_cheltuiala(self):
+        self.driver.find_element(By.XPATH, self.buton_actiune_cheltuiala_locator).click()
+        self.time.sleep(2)
+        self.driver.find_element(By.XPATH, self.buton_sterge_cheltuiala_locator).click()
+        self.time.sleep(2)
+        self.driver.find_element(By.XPATH, self.buton_confirmare_stergere_cheltuiala_locator).click()
+        self.time.sleep(2)

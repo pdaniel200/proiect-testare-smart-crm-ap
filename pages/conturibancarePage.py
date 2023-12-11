@@ -24,6 +24,9 @@ class ConturiBancarePage:
         self.selectare_stare_cont_locator = LocatoriPaginaSmartCrm.SELECTOR_STARE_CONT_XPATH
         self.selectare_stare_cont_activ_locator = LocatoriPaginaSmartCrm.SELECTOR_STARE_CONT_ACTIV_XPATH
         self.apasa_buton_adaugare_cont_locator = LocatoriPaginaSmartCrm.BUTON_ADAUGARE_CONT_XPATH
+        self.actiune_cont_locator = LocatoriPaginaSmartCrm.BUTON_ACTIUNE_CONT_XPATH
+        self.sterge_cont_locator = LocatoriPaginaSmartCrm.BUTON_STERGE_CONT_XPATH
+        self.confirmare_stergere_cont_locator = LocatoriPaginaSmartCrm.BUTON_CONFIRMARE_STERGERE_CONT_XPATH
 
     def adauga_cont_bancar(self):
         self.driver.find_element(By.XPATH, self.apasa_buton_finante_locator).click()
@@ -46,4 +49,13 @@ class ConturiBancarePage:
         self.time.sleep(2)
         self.driver.find_element(By.ID, self.apasa_buton_adaugare_cont_locator).click()
         self.time.sleep(1)
+
+    def sterge_cont_bancar(self):
+        self.time.sleep(2)
+        self.driver.find_element(By.XPATH, self.actiune_cont_locator).click()
+        self.time.sleep(2)
+        self.driver.find_element(By.XPATH, self.sterge_cont_locator).click()
+        self.time.sleep(2)
+        self.driver.find_element(By.XPATH, self.confirmare_stergere_cont_locator).click()
+        self.time.sleep(2)
 
