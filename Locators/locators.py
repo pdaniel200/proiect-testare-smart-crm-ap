@@ -25,6 +25,9 @@ class LocatoriPaginaSmartCrm():
     SELECTOR_STARE_CONT_XPATH = "//div[contains(text(),'--')]"
     SELECTOR_STARE_CONT_ACTIV_XPATH = "/html/body/div[6]/div/div/div/div/form/div/div[1]/div[9]/div/div/div/div[2]/ul/li[2]/a/span"
     BUTON_ADAUGARE_CONT_XPATH = "save-bankaccount"
+    BUTON_ACTIUNE_CONT_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[8]/div/div/a"
+    BUTON_STERGE_CONT_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[8]/div/div/div/a[3]"
+    BUTON_CONFIRMARE_STERGERE_CONT_XPATH = "/html/body/div[7]/div/div[3]/button[1]"
 
     #locatori transfer intre conturi
     NUME_DETINATOR_CONT_XPATH = "//a[normalize-space()='cont 1 companie']"
@@ -55,7 +58,7 @@ class LocatoriPaginaSmartCrm():
     BUTON_STERGE_TASK_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[11]/div/div/div/a[3]"
     BUTON_CONFIRMARE_STERGERE_TASK_XPATH = "/html/body/div[8]/div/div[3]/button[1]"
 
-    #locatori adaugare comanda furnizor
+    #locatori adaugare stergere comanda furnizor
     BUTON_MENIU_ACHIZITII_XPATH = "//span[contains(text(),'Achiziții și Furnizori')]"
     BUTON_MENIU_COMENZI_FURNIZORI_XPATH = "//a[contains(text(),'Comenzi')]"
     BUTON_ADAUGARE_COMANDA_XPATH = "//a[@class='btn btn-primary rounded f-14 p-2 mr-3 float-left openRightModal']"
@@ -66,8 +69,11 @@ class LocatoriPaginaSmartCrm():
     CAMP_CANTITATE_PRODUS_XPATH = '//*[@id="sortable"]/div/div/table/tbody/tr[2]/td[3]/input[1]'
     BUTON_SALVARE_COMANDA_XPATH = '//*[@id="saveOrderForm"]/div[8]/div/div/button'
     BUTON_SALVARE_SI_MARCARE_TRIMISA_XPATH = '//*[@id="saveOrderForm"]/div[8]/div/div/ul/li[3]/a'
+    BUTON_ACTIUNE_COMANDA_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[7]/div/div/a"
+    BUTON_STERGE_COMANDA_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[7]/div/div/div/a[8]"
+    BUTON_CONFIRMARE_STERGERE_COMANDA_XPATH = '//*[@id="body"]/div[8]/div/div[3]/button[1]'
 
-    #locatori adaugare cheltuiala
+    #locatori adaugare stergere cheltuiala
     BUTON_MENIU_CHELTUIELI_XPATH = "//a[@title='Cheltuieli']"
     BUTON_ADAUGARE_CHELTUIALA_XPATH = "//a[@class='btn btn-primary rounded f-14 p-2 mr-3 float-left openRightModal']"
     CAMP_NUME_ARTICOL_CHELTUIALA_ID = "item_name"
@@ -75,6 +81,9 @@ class LocatoriPaginaSmartCrm():
     SELECTOR_ANGAJAT_XPATH = '//*[@id="save-expense-data-form"]/div/div[1]/div[6]/div/div/button'
     SELECTEAZA_ANGAJAT_1_XPATH = '/html/body/div[6]/div/div/div/div/form/div/div[1]/div[6]/div/div/div/div[2]/ul/li[2]/a'
     BUTON_SALVARE_CHELTUIALA_XPATH = "//button[@id='save-expense-form']"
+    BUTON_ACTIUNE_CHELTUIALA_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[9]/div/div/a"
+    BUTON_STERGE_CHELTUIALA_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[9]/div/div/div/a[3]"
+    BUTON_CONFIRMARE_STERGERE_CHELTUIALA_XPATH = '//*[@id="body"]/div[8]/div/div[3]/button[1]'
 
     #locatori adaugare stergere bunuri
     BUTON_MENIU_ACHIZITII_BUNURI_XPATH = "//span[normalize-space()='Active | Bunuri']"
