@@ -216,7 +216,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         except AssertionError as e:
             # In caz de eroare, scrie in log ca testul a esuat
             logger.error(f"Testare Pagina Login - Test login și returnare mesaj a eșuat: {str(e)}")
-            raise  # Re-raise the assertion error to mark the test as failed
+            raise  # Ridicare exceptie pentru a fi marcata in raportul de testare
         else:
             # Scrie in log ca testul a fost efectuat cu succes
             logger.info("Testare Pagina Login - Test login și returnare mesaj a fost efectuat cu succes.")
