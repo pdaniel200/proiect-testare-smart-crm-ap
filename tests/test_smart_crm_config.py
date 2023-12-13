@@ -9,6 +9,9 @@ import unittest
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
 from Pages.dashboardPage import DashboardPage
 from Pages.loginPage import LoginPage
@@ -23,9 +26,8 @@ from Pages.adaugarebunuriPage import AdaugaBunuriPage
 import time
 from decouple import AutoConfig
 import logging
+import re
 
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 from Data.configurare_driver import ConfigurareDriver
 
 # Configurare log
@@ -56,6 +58,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         cls.dashboard_page = DashboardPage(cls.driver)
         cls.conturibancare_page = ConturiBancarePage(cls.driver)
         cls.conturibancaretransfer_page = ConturiBancareTransferPage(cls.driver)
+
         cls.mesaj_invalid_feedback_locator = "//div[@class='invalid-feedback']"
         cls.alocareprogram_page = AlocareProgramPage(cls.driver)
         cls.adaugaretask_page = AdaugaTaskPage(cls.driver)
@@ -74,68 +77,109 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         self.login_page.enter_username(self.USERNAME) # introducere username
         time.sleep(3)
         self.login_page.enter_password(self.PASSWORD) # introducere parola
-        self.login_page.driver.save_screenshot("Results/test_a_login_page.png") # Salveaza o captura de ecran dupa oprirea cronometrului
+        self.login_page.driver.save_screenshot("Results/test_a_login_page.png") # Salveaza o captura de ecran a paginii de conectare
         time.sleep(3)
         self.login_page.click_login()
+        message = self.driver.find_element(By.XPATH, self.login_page.mesaj_intampinare_dashboard_locator).text
+        # Verifica daca mesajul de intampinare este cel asteptat
+        self.assertEqual(message, "Bine ați venit test")
+        # scrie in log ca testul a fost efectuat cu succes
+        print(f'Mesajul de intampinare este: {message}')
+        logger.info(f"Test Pagina Login - Logarea cu o parola valida a fost efectuata cu succes. Mesaj: {message}")
         time.sleep(3)
 
     def test_b_contorizare_timp(self):
         '''Metoda care efectueaza testarea paginii de sarcini cu cronometrul pornit si oprit'''
-        # Aceseaza pagina de sarcini din cadrul aplicatiei
-        self.dashboard_page.driver.get("https://app.smart-crm.ro/account/tasks")
-        # Scrie in log ca testul a fost efectuat cu succes
-        logger.info("Test Pagina Login - Logarea cu o parola valida a fost efectuata cu succes.")
-        time.sleep(4)
-        # Începeți funcționalitatea de cronometrare pe pagina de sarcini
-        self.dashboard_page.pornire_cronometru()
-        # Salveaza o captura de ecran dupa oprirea cronometrului
-        self.dashboard_page.driver.save_screenshot("Results/test_b_contor_oprit.png")
-        # Scrie in log ca testul a fost efectuat cu succes
-        logger.info("Testare Pagina Sarcini - Pornire cronometru efectuat cu succes.")
-        time.sleep(6)
+        try:
+            # Aceseaza pagina de sarcini din cadrul aplicatiei
+            self.dashboard_page.driver.get("https://app.smart-crm.ro/account/tasks")
+            self.dashboard_page.pornire_cronometru()
 
-        # Opreste funcționalitatea de cronometrare pe pagina de sarcini
-        self.dashboard_page.oprire_cronometru()
+            # Verifica prezenta ceasului de cronometru
+            ceas_taskuri = self.dashboard_page.driver.find_element(By.XPATH, self.dashboard_page.ceas_cronometru_locator)
+            self.assertIsNotNone(ceas_taskuri, "Cronometrul nu a inceput.")
+            logger.info("Testare Pagina Sarcini - Pornire cronometru efectuat cu succes.")
+            time.sleep(6)
 
-        # Salveaza o captura de ecran dupa oprirea cronometrului
-        self.dashboard_page.driver.save_screenshot("Results/test_b_contor_pornit.png")
-        # scrie in log ca testul a fost efectuat cu succes
-        logger.info("Test Pagina Sarcini - Oprire cronometru efectuat cu succes.")
-        time.sleep(6)
+            # Oprire cronometru
+            self.dashboard_page.oprire_cronometru()
+            logger.info("Test Pagina Sarcini - Oprire cronometru a fost efectuată cu succes.")
+            time.sleep(2) # asteapta 2 secunde inainte de efectuarea capturii de ecran
+            # Salveaza o captura de ecran dupa oprirea cronometrului
+            self.dashboard_page.driver.save_screenshot("Results/test_b2_contor_oprit.png")
+
+        except TimeoutException as e:
+            logger.error("Testarea cronometrului a eșuat: " + str(e))
+            self.fail("Cronometrul nu a functionat corespunzator.")
 
     def test_c_adaugare_cont_bancar(self):
         '''Metoda care efectueaza testarea paginii de conturi bancare cu adaugare cont bancar'''
         self.conturibancare_page.adauga_cont_bancar()
-        time.sleep(2)
+        # Asteapta pana cand contul adaugat este cel asteptat
+        WebDriverWait(self.driver, 10).until(
+            EC.text_to_be_present_in_element((By.XPATH, self.conturibancare_page.text_nume_detinator_cont_locator), "Test Cont"))
+        # Verifica daca contul adaugat este cel asteptat
+        cont_adaugat = self.driver.find_element(By.XPATH, self.conturibancare_page.text_nume_detinator_cont_locator).text
+        self.assertEqual(cont_adaugat, "Test Cont")
         self.conturibancare_page.driver.save_screenshot("Results/test_c_adaugare_cont_bancar.png")
-        time.sleep(1)
-        self.conturibancare_page.sterge_cont_bancar()
-        # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test adaugare cont bancar - Efectuat cu succes.")
+        # Sterge contul adaugat
+        self.conturibancare_page.sterge_cont_bancar()
 
     def test_d_transfer_intre_conturi(self):
         '''Metoda care efectueaza testarea paginii de conturi bancare cu transfer intre conturi'''
-        self.conturibancaretransfer_page.transfera_intre_conturi()
+        WebDriverWait(self.driver, 10).until(
+            EC.text_to_be_present_in_element((By.XPATH, self.conturibancaretransfer_page.text_nume_detinator_cont1_locator),
+                                             "cont 1 companie"))
+        self.driver.find_element(By.XPATH, self.conturibancaretransfer_page.apasa_nume_detinator_cont_locator).click()
         time.sleep(2)
+        valoare_cont = self.driver.find_element(By.XPATH, self.conturibancaretransfer_page.sold_cont_bancar_locator).text
+        # Extragere numere din string
+        valoare_cont_initial_cifre = re.search(r'(\d+,\d+\.\d+|\d+\.\d+|\d+)', valoare_cont)
+        valoare_cont_initial_c = float(valoare_cont_initial_cifre.group(0).replace(',', ''))
+        print(f'valoare_cont_initial: {valoare_cont_initial_c}')
+        self.conturibancaretransfer_page.transfera_intre_conturi()
+        time.sleep(4)
+        valoare_cont_dupa_transfer = self.driver.find_element(By.XPATH, self.conturibancaretransfer_page.sold_cont_bancar_locator).text
+        # Extragere numere din string
+        valoare_cont_dupa_transfer_cifre = re.search(r'(\d+,\d+\.\d+|\d+\.\d+|\d+)', valoare_cont_dupa_transfer)
+        valoare_cont_dupa_transfer_c = float(valoare_cont_dupa_transfer_cifre.group(0).replace(',', ''))
+        print(f'valoare_cont_dupa transfer: {valoare_cont_dupa_transfer_c}')
+        # Verifica daca transferul a fost efectuat cu succes
+        self.assertEqual(valoare_cont_initial_c, valoare_cont_dupa_transfer_c + 10)
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Testare transfer intre conturi bancare - Efectuat cu succes.")
         self.conturibancaretransfer_page.driver.save_screenshot("Results/test_d_transfer_intre_conturi.png")
 
     def test_e_alocare_program_angajat(self):
         '''Metoda care efectueaza testarea paginii de alocare program angajat'''
+
         self.alocareprogram_page.adauga_program_angajat()
-        time.sleep(2)
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element((By.XPATH, self.alocareprogram_page.mesaj_notificari_sistem_locator), "Schimbul angajatului a fost salvat."))
+        mesaj_notificare_sistem = self.driver.find_element(By.XPATH, self.alocareprogram_page.mesaj_notificari_sistem_locator).text
+        self.assertEqual(mesaj_notificare_sistem, 'Schimbul angajatului a fost salvat.')
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test alocare program angajat - Efectuat cu succes.")
         self.alocareprogram_page.driver.save_screenshot("Results/test_e_alocare_program_angajat.png")
-        self.alocareprogram_page.sterge_program_angajat()
         time.sleep(2)
+        self.alocareprogram_page.sterge_program_angajat()
+        WebDriverWait(self.driver, 10).until(
+            EC.text_to_be_present_in_element((By.XPATH, self.alocareprogram_page.mesaj_notificari_sistem_locator),
+                                             "S-a șters cu succes."))
+        mesaj_notificare_sistem = self.driver.find_element(By.XPATH,
+                                                           self.alocareprogram_page.mesaj_notificari_sistem_locator).text
+        self.assertEqual(mesaj_notificare_sistem, 'S-a șters cu succes.')
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test stergere program angajat - Efectuat cu succes.")
         time.sleep(2)
 
+    @pytest.mark.smoke()  # marcarea testului ca smoke
     def test_f_adaugare_task(self):
+        self.test_a_login_valid()
+        # self.driver.get("https://app.smart-crm.ro/account/shifts")
+        time.sleep(2)
         '''Metoda care efectueaza testarea paginii de adaugare task'''
+
         # Aceseaza pagina de sarcini din cadrul aplicatiei
         self.adaugaretask_page.driver.get("https://app.smart-crm.ro/account/tasks")
         time.sleep(4)
@@ -226,7 +270,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         self.driver.get("https://smart-crm.ro/")
         assert "Smart CRM" in self.driver.title
 
-    @pytest.mark.smoke() # marcarea testului ca smoke
+
     def test_smoke_title(self):
         self.driver.get("https://app.smart-crm.ro/login")
         assert "SMART CRM" in self.driver.title

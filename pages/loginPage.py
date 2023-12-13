@@ -24,6 +24,7 @@ class LoginPage:
         self.buton_inainte_locator = LocatoriPaginaSmartCrm.BUTON_INAINTE_ID
         self.login_button_locator = LocatoriPaginaSmartCrm.LOGIN_BUTON_ID
         self.mesaj_invalid_feedback_locator = LocatoriPaginaSmartCrm.MESAJ_INVALID_FEEDBACK_XPATH
+        self.mesaj_intampinare_dashboard_locator = LocatoriPaginaSmartCrm.MESAJ_INTAMPINARE_DASHBOARD_XPATH
 
     def enter_username(self, username):
         self.driver.find_element(By.ID, self.username_textbox_locator).clear()

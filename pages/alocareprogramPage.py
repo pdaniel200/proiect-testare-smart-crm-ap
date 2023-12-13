@@ -25,6 +25,8 @@ class AlocareProgramPage:
         self.apasa_buton_prima_zi_alocata_locator = LocatoriPaginaSmartCrm.BUTON_PRIMA_ZI_ALOCATA_XPATH
         self.apasa_buton_sterge_program_locator = LocatoriPaginaSmartCrm.BUTON_STERGE_PROGRAM_XPATH
 
+        self.mesaj_notificari_sistem_locator = LocatoriPaginaSmartCrm.MESAJ_NOTIFICARI_SISTEM_XPATH
+
     def adauga_program_angajat(self):
         self.driver.find_element(By.XPATH, self.apasa_buton_meniu_hr_locator).click()
         self.time.sleep(2)
