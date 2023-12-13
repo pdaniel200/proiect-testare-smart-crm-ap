@@ -3,16 +3,20 @@
 
 class LocatoriPaginaSmartCrm():
 
+    MESAJ_NOTIFICARI_SISTEM_XPATH = "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]"
+
     #locatori pagina de login
     USERNAME_TEXTBOX_ID = "email"
     PASSWORD_TEXTBOX_ID = "password"
     BUTON_INAINTE_ID = "submit-next"
     LOGIN_BUTON_ID = "submit-login"
+    MESAJ_INTAMPINARE_DASHBOARD_XPATH = "/html/body/div[1]/section/div[3]/div[1]/div[1]/h3"
     MESAJ_INVALID_FEEDBACK_XPATH = "//div[@class='invalid-feedback']"
 
     #locatori pagina de sarcini
     PORNIRE_CRONOMETRU_XPATH = "//i[@class='bi bi-play-circle-fill']"
     OPRIRE_CRONOMETRU_XPATH = "//i[@class='bi bi-stop-circle-fill']"
+    CEAS_CRONOMETRU_XPATH = '/html/body/header/div[2]/span/span'
 
     #locatori pagina adaugare cont bancar
     BUTON_FINANTE_XPATH = "//span[contains(text(),'FINANȚE')]"
@@ -28,6 +32,8 @@ class LocatoriPaginaSmartCrm():
     BUTON_ACTIUNE_CONT_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[8]/div/div/a"
     BUTON_STERGE_CONT_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[8]/div/div/div/a[3]"
     BUTON_CONFIRMARE_STERGERE_CONT_XPATH = "/html/body/div[7]/div/div[3]/button[1]"
+    TEXT_NUME_DETINATOR_CONT_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[3]/a"
+    TEXT_NUME_DETINATOR_CONT1_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[2]/td[3]/a"
 
     #locatori transfer intre conturi
     NUME_DETINATOR_CONT_XPATH = "//a[normalize-space()='cont 1 companie']"
@@ -36,6 +42,8 @@ class LocatoriPaginaSmartCrm():
     SELECTOR_CONT2COMPANIE_XPATH = "/html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[2]/a[1]/span[1]"
     CAMP_CANTITATE_ID = "amount"
     BUTON_SALVARE_XPATH = "//button[@id='save-transaction']"
+    SOLD_CONT_BANCAR_XPATH = "/html/body/div[1]/section/div[3]/div/div[1]/div[1]/div/div[1]/div[2]/h2"
+
 
     #locatori alocare si stergere program angajat
     BUTON_MENIU_HR_XPATH = "//span[normalize-space()='HR']"

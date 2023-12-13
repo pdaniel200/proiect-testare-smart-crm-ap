@@ -1,4 +1,4 @@
-# Testing login, running and stopping the timer, creating and deleteing task and various operations on the app.smart-crm.ro webpage, Chrome, Firefox and Edge
+# Test creating and deleteing tasks and various operations, using Chrome, Firefox and Edge
 
 
 
