@@ -1,4 +1,4 @@
-# Test creating and deleteing tasks and various operations, using Chrome, Firefox and Edge
+# Test for creating and deleteing tasks and various operations, using Chrome, Firefox and Edge
 
 
 
@@ -18,7 +18,7 @@
    if you just type: `pytest Tests/test_smart_crm_config.py` the result files would be stored on the folder `Results` and in the html test report filename will include the browser type: `report_test_smart_crm_browser_` + {browser_type} + `.html`
 
 
-# You can choose a type of brower from wich yo can run the test chrome/firefox/edge
+# You can choose a type of browser from wich yo can run the test chrome/firefox/edge
 1. browser: chrome
 2. browser: firefox
 3. browser: edge
