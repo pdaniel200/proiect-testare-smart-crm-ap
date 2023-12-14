@@ -173,7 +173,9 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         logger.info("Test stergere program angajat - Efectuat cu succes.")
         time.sleep(2)
 
+    # @pytest.mark.smoke()  # test smoke
     def test_f_adaugare_task(self):
+        # self.test_a_login_valid()
         '''Metoda care efectueaza testarea paginii de adaugare task'''
         # Aceseaza pagina de sarcini din cadrul aplicatiei
         self.adaugaretask_page.driver.get("https://app.smart-crm.ro/account/tasks")
@@ -319,7 +321,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         self.driver.get("https://smart-crm.ro/")
         assert "Smart CRM" in self.driver.title
 
-    @pytest.mark.smoke()  # test smoke
+    # @pytest.mark.smoke()  # test smoke
     def test_smoke_title(self):
         self.test_a_login_valid()
         time.sleep(2)
