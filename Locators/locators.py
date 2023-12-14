@@ -6,7 +6,8 @@ class LocatoriPaginaSmartCrm():
     MESAJ_NOTIFICARI_SISTEM_XPATH = "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]"
     MESAJ_NOTIFICARI_SISTEM_STERGERE_XPATH = "/html[1]/body[1]/div[8]/div[1]/div[2]/div[1]"
 
-    #locatori pagina de login
+
+    #locatori pagina de login - logout
     USERNAME_TEXTBOX_ID = "email"
     PASSWORD_TEXTBOX_ID = "password"
     BUTON_INAINTE_ID = "submit-next"

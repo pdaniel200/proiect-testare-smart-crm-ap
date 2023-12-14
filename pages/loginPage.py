@@ -17,7 +17,6 @@ class LoginPage:
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
 
-
         # Locatori pagina de login
         self.username_textbox_locator = LocatoriPaginaSmartCrm.USERNAME_TEXTBOX_ID
         self.password_textbox_locator = LocatoriPaginaSmartCrm.PASSWORD_TEXTBOX_ID
@@ -29,8 +28,6 @@ class LoginPage:
     def enter_username(self, username):
         self.driver.find_element(By.ID, self.username_textbox_locator).clear()
         self.driver.find_element(By.ID, self.username_textbox_locator).send_keys(username)
-        #self.wait.until(EC.presence_of_element_located((By.ID, "email")))
-        #self.driver.find_element(By.ID, self.username_textbox_locator).send_keys(username)
         self.driver.find_element(By.ID, self.buton_inainte_locator).click()
 
     def enter_password(self, password):

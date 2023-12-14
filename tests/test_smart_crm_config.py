@@ -36,6 +36,7 @@ logger = logging.getLogger(__name__) # creaza un obiect logger
 
 
 class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, DashboardPage, ConturiBancarePage, ConturiBancareTransferPage, AlocareProgramPage, AdaugaTaskPage, AdaugaComandaFurnizorPage, AdaugaCheltuialaPage, AdaugaBunuriPage):
+    # driver = None
     wait = None # variabila pentru asteptare
 
     def __init__(self, methodName: str = ...):
@@ -58,8 +59,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         cls.dashboard_page = DashboardPage(cls.driver)
         cls.conturibancare_page = ConturiBancarePage(cls.driver)
         cls.conturibancaretransfer_page = ConturiBancareTransferPage(cls.driver)
-
-        cls.mesaj_invalid_feedback_locator = "//div[@class='invalid-feedback']"
+        # cls.mesaj_invalid_feedback_locator = "//div[@class='invalid-feedback']"
         cls.alocareprogram_page = AlocareProgramPage(cls.driver)
         cls.adaugaretask_page = AdaugaTaskPage(cls.driver)
         cls.adaugarecomandafurnizor_page = AdaugaComandaFurnizorPage(cls.driver)
@@ -82,7 +82,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         self.login_page.click_login()
         message = self.driver.find_element(By.XPATH, self.login_page.mesaj_intampinare_dashboard_locator).text
         # Verifica daca mesajul de intampinare este cel asteptat
-        self.assertEqual(message, "Bine ați venit test")
+        self.assertEqual(message, "Bine ați venit test", "Mesajul de intampinare nu este cel asteptat.")
         # scrie in log ca testul a fost efectuat cu succes
         print(f'Mesajul de intampinare este: {message}')
         logger.info(f"Test Pagina Login - Logarea cu o parola valida a fost efectuata cu succes. Mesaj: {message}")
@@ -95,7 +95,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
             self.dashboard_page.driver.get("https://app.smart-crm.ro/account/tasks")
             self.dashboard_page.pornire_cronometru()
 
-            # Verifica prezenta ceasului de cronometru
+            # Verifica prezenta ceasului de cronometru pentru sarcini
             ceas_taskuri = self.dashboard_page.driver.find_element(By.XPATH, self.dashboard_page.ceas_cronometru_locator)
             self.assertIsNotNone(ceas_taskuri, "Cronometrul nu a inceput.")
             logger.info("Testare Pagina Sarcini - Pornire cronometru efectuat cu succes.")
@@ -104,11 +104,11 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
             # Oprire cronometru
             self.dashboard_page.oprire_cronometru()
             logger.info("Test Pagina Sarcini - Oprire cronometru a fost efectuată cu succes.")
-            time.sleep(2) # asteapta 2 secunde inainte de efectuarea capturii de ecran
+            time.sleep(2)
             # Salveaza o captura de ecran dupa oprirea cronometrului
             self.dashboard_page.driver.save_screenshot("Results/test_b2_contor_oprit.png")
 
-        except TimeoutException as e:
+        except TimeoutException as e: # exceptie pentru cazul in care cronometrul nu a pornit
             logger.error("Testarea cronometrului a eșuat: " + str(e))
             self.fail("Cronometrul nu a functionat corespunzator.")
 
@@ -120,7 +120,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
             EC.text_to_be_present_in_element((By.XPATH, self.conturibancare_page.text_nume_detinator_cont_locator), "Test Cont"))
         # Verifica daca contul adaugat este cel asteptat
         cont_adaugat = self.driver.find_element(By.XPATH, self.conturibancare_page.text_nume_detinator_cont_locator).text
-        self.assertEqual(cont_adaugat, "Test Cont")
+        self.assertEqual(cont_adaugat, "Test Cont", "Contul adaugat nu este cel asteptat.")
         self.conturibancare_page.driver.save_screenshot("Results/test_c_adaugare_cont_bancar.png")
         logger.info("Test adaugare cont bancar - Efectuat cu succes.")
         # Sterge contul adaugat
@@ -146,7 +146,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         valoare_cont_dupa_transfer_c = float(valoare_cont_dupa_transfer_cifre.group(0).replace(',', ''))
         print(f'valoare_cont_dupa transfer: {valoare_cont_dupa_transfer_c}')
         # Verifica daca transferul a fost efectuat cu succes
-        self.assertEqual(valoare_cont_initial_c, valoare_cont_dupa_transfer_c + 10)
+        self.assertEqual(valoare_cont_initial_c, valoare_cont_dupa_transfer_c + 10, "Transferul nu a fost efectuat cu succes.")
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Testare transfer intre conturi bancare - Efectuat cu succes. Pentru verificare am facut un transfer de 10 lei si am verificat daca valoarea contului a scazut cu valoarea transferata.")
         self.conturibancaretransfer_page.driver.save_screenshot("Results/test_d_transfer_intre_conturi.png")
@@ -168,7 +168,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
                                              "S-a șters cu succes."))
         mesaj_notificare_sistem = self.driver.find_element(By.XPATH,
                                                            self.alocareprogram_page.mesaj_notificari_sistem_locator).text
-        self.assertEqual(mesaj_notificare_sistem, 'S-a șters cu succes.')
+        self.assertEqual(mesaj_notificare_sistem, 'S-a șters cu succes.', "Mesajul de notificare nu este cel asteptat.")
         # scrie in log ca programul a fost sters cu succes
         logger.info("Test stergere program angajat - Efectuat cu succes.")
         time.sleep(2)
@@ -186,7 +186,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         # Verifica daca taskul adaugat este cel asteptat
         task_adaugat = self.driver.find_element(By.XPATH,
                                                 self.adaugaretask_page.text_task_nou_adaugat_locator).text
-        self.assertEqual(task_adaugat, "Sarcina Test")
+        self.assertEqual(task_adaugat, "Sarcina Test", "Numele taskului adaugat nu este cel asteptat.")
         self.adaugaretask_page.driver.save_screenshot("Results/test_f_adaugare_task.png")
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test adaugare task - Efectuat cu succes. Pentru verificare am adaugat un task si am verificat daca exista in lista de taskuri")
@@ -221,7 +221,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         numar_comanda_noua_int = int(numar_comanda_noua_str.group())
         print(f'numar_comanda_finala: {numar_comanda_noua_int}')
         # Verifica daca comanda a fost adaugata cu succes
-        self.assertEqual(numar_comanda_noua_int, numar_ultima_comanda_int + 1)
+        self.assertEqual(numar_comanda_noua_int, numar_ultima_comanda_int + 1, "Numarul comenzii nu a fost incrementat cu o unitate.")
         self.adaugarecomandafurnizor_page.driver.save_screenshot("Results/test_g_adaugare_comanda_furnizor.png")
         time.sleep(2)
         self.adaugarecomandafurnizor_page.sterge_comanda_furnizor()
@@ -238,7 +238,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         # Verifica daca cheltuiala adaugata este cea asteptata
         nume_cheltuiala = self.driver.find_element(By.XPATH,
                                                 self.adaugarecheltuiala_page.nume_cheltuiala_locator).text
-        self.assertEqual(nume_cheltuiala, "Cheltuiala Test")
+        self.assertEqual(nume_cheltuiala, "Cheltuiala Test", "Numele cheltuielii adaugate nu este cel asteptat.")
         self.adaugarecheltuiala_page.driver.save_screenshot("Results/test_h_adaugare_cheltuiala.png")
 
         self.adaugarecheltuiala_page.sterge_cheltuiala()
@@ -252,13 +252,9 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         logger.info("Test adaugare + stergere cheltuiala - Efectuat cu succes. Pentru verificare am adaugat o cheltuiala si am verificat daca exista in lista de cheltuieli si am sters-o.")
         time.sleep(2)
 
-
     def test_i_adaugare_bunuri(self):
-
         '''Metoda care efectueaza testarea paginii de adaugare bunuri'''
-
         self.adaugarebunuri_page.adauga_active_bunuri()
-
         # Asteapta pana cand acciza adaugata este cea asteptata
         WebDriverWait(self.driver, 10).until(
             EC.text_to_be_present_in_element((By.XPATH, self.adaugarebunuri_page.text_denumire_bun_locator),
@@ -266,46 +262,46 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         # Verifica daca acciza adaugata este cea asteptata
         bun_adaugat = self.driver.find_element(By.XPATH,
                                                 self.adaugarebunuri_page.text_denumire_bun_locator).text
-        self.assertEqual(bun_adaugat, "Bun Test")
+        self.assertEqual(bun_adaugat, "Bun Test", "Numele bunului adaugat nu este cel asteptat.")
         # self.adaugaretask_page.driver.save_screenshot("Results/test_f_adaugare_task.png")
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test adaugare bunuri - Efectuat cu succes. Pentru verificare am adaugat un bun si am verificat daca exista in lista de bunuri")
-        time.sleep(2)
-
+        time.sleep(1)
         self.adaugarebunuri_page.driver.save_screenshot("Results/test_i_adaugare_bunuri.png")
-
-        time.sleep(2)
+        time.sleep(1)
         self.adaugarebunuri_page.sterge_active_bunuri()
         time.sleep(2)
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Test stergere bunuri - Efectuat cu succes.")
         time.sleep(2)
 
-
+    # @pytest.mark.smoke()  # test smoke
     def test_j_iesire_cont(self):
         '''Metoda care efectueaza testarea paginii de iesire din cont'''
         # Efectuați pașii de deconectare
         self.dashboard_page.iesire_cont()
-        assert "https://app.smart-crm.ro/login" in self.driver.current_url
-        time.sleep(2)
-
+        time.sleep(1)
+        current_url = self.driver.current_url
+        self.assertEqual(current_url, "https://app.smart-crm.ro/login", "Nu s-a redirectionat catre pagina de login.")
         # scrie in log ca testul a fost efectuat cu succes
         logger.info("Testare iesire din cont - Iesirea din cont a fost efectuata cu succes. Am verificat daca s-a redirectionat catre pagina de login.")
 
-
     def test_k_login_invalid_password(self):
+        time.sleep(2)
         '''Metoda care efectueaza testarea paginii de login cu o parola invalida - try - except - else
         '''
         try:
+            self.login_page.driver.get("https://app.smart-crm.ro/login")
             # Aceseaza pagina de login si introduce datele de conectare
             self.login_page.enter_username(self.USERNAME)
             time.sleep(2)
             self.login_page.enter_password(self.PAROLA_GRESITA)
             time.sleep(1)
             self.login_page.click_login()
-            message = self.driver.find_element(By.XPATH, self.mesaj_invalid_feedback_locator).text
+            # message = self.driver.find_element(By.XPATH, self.mesaj_invalid_feedback_locator).text
+            msg = self.login_page.vreificare_mesaj_parola_gresita()
             # Verifica daca mesajul de eroare este cel asteptat
-            self.assertEqual(message, "Aceste acreditări nu se potrivesc cu înregistrările noastre.")
+            self.assertEqual(msg, "Aceste acreditări nu se potrivesc cu înregistrările noastre.")
             time.sleep(1)
             # Salveaza o captura de ecran a paginii de conectare cu mesajul parola gresita
             self.login_page.driver.save_screenshot("Results/test_j_login_invalid_pass.png")
@@ -323,7 +319,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         self.driver.get("https://smart-crm.ro/")
         assert "Smart CRM" in self.driver.title
 
-    @pytest.mark.smoke()  # marcarea testului ca smoke
+    @pytest.mark.smoke()  # test smoke
     def test_smoke_title(self):
         self.test_a_login_valid()
         time.sleep(2)
