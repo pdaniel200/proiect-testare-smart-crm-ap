@@ -25,11 +25,11 @@
 
 The tests will be executed by default in Chrome but can you can choose from the "/data/config.yaml" file to also be executed in Firefox or Edge
 
-# Browser visibility when running the test: True or False
+# Browser visibility while running the test: True or False
 1. headless: False - the browser will be visible while executing the test
 2. headless: True - the browser will not be visible while executing the test.
 
-# Option to test with the local webdriver or automanaged by WebDriver Manager
+# Option to test with the local webdriver or managed by WebDriver Manager
 1. webdriver: local - the webdriver will be launched from the drvweb folder
 2. webdriver: remote - the webdriver will be automaticaly installed by WebDriver Manager
 
