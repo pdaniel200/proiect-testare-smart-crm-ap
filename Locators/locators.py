@@ -4,6 +4,7 @@
 class LocatoriPaginaSmartCrm():
 
     MESAJ_NOTIFICARI_SISTEM_XPATH = "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]"
+    MESAJ_NOTIFICARI_SISTEM_STERGERE_XPATH = "/html[1]/body[1]/div[8]/div[1]/div[2]/div[1]"
 
     #locatori pagina de login
     USERNAME_TEXTBOX_ID = "email"
@@ -65,12 +66,13 @@ class LocatoriPaginaSmartCrm():
     BUTON_ACTIUNE_LA_TASK_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[11]/div/div/a/i"
     BUTON_STERGE_TASK_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[11]/div/div/div/a[3]"
     BUTON_CONFIRMARE_STERGERE_TASK_XPATH = "/html/body/div[8]/div/div[3]/button[1]"
+    TEXT_TASK_NOU_ADAUGAT_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[4]/div/div/h5/a/h5"
 
     #locatori adaugare stergere comanda furnizor
     BUTON_MENIU_ACHIZITII_XPATH = "//span[contains(text(),'Achiziții și Furnizori')]"
     BUTON_MENIU_COMENZI_FURNIZORI_XPATH = "//a[contains(text(),'Comenzi')]"
     BUTON_ADAUGARE_COMANDA_XPATH = "//a[@class='btn btn-primary rounded f-14 p-2 mr-3 float-left openRightModal']"
-    SELECTOR_FURNIZOR_XPATH = "/html/body/div[6]/div/div/div/form/div[1]/div[2]/div/div/div/button"
+    SELECTOR_FURNIZOR_XPATH = "/html/body/div[6]/div/div/div/form/div[1]/div[2]/div/div/div/button/div/div/div"
     SELECTEAZA_FURNIZOR_1_XPATH = "/html/body/div[6]/div/div/div/form/div[1]/div[2]/div/div/div/div/div/ul/li[2]/a"
     SELECTOR_PRODUS_XPATH = "/html/body/div[6]/div/div/div/form/div[2]/div[2]/div/div/div[1]/button/div/div/div"
     SELECTEAZA_SERVICIU_1_XPATH = "/html/body/div[6]/div/div/div/form/div[2]/div[2]/div/div/div[1]/div/div[2]/ul/li[2]/a"
@@ -80,6 +82,7 @@ class LocatoriPaginaSmartCrm():
     BUTON_ACTIUNE_COMANDA_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[7]/div/div/a"
     BUTON_STERGE_COMANDA_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[7]/div/div/div/a[8]"
     BUTON_CONFIRMARE_STERGERE_COMANDA_XPATH = '//*[@id="body"]/div[8]/div/div[3]/button[1]'
+    TEXT_NUMAR_COMANDA_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[1]/div/div/h5/a"
 
     #locatori adaugare stergere cheltuiala
     BUTON_MENIU_CHELTUIELI_XPATH = "//a[@title='Cheltuieli']"
@@ -92,6 +95,7 @@ class LocatoriPaginaSmartCrm():
     BUTON_ACTIUNE_CHELTUIALA_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[9]/div/div/a"
     BUTON_STERGE_CHELTUIALA_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[9]/div/div/div/a[3]"
     BUTON_CONFIRMARE_STERGERE_CHELTUIALA_XPATH = '//*[@id="body"]/div[8]/div/div[3]/button[1]'
+    NUME_CHELTUIALA_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[3]/a"
 
     #locatori adaugare stergere bunuri
     BUTON_MENIU_ACHIZITII_BUNURI_XPATH = "//span[normalize-space()='Active | Bunuri']"
@@ -104,6 +108,7 @@ class LocatoriPaginaSmartCrm():
     BUTON_ACTIUNE_ACTIVE_BUNURI_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[7]/div/div/a/i"
     BUTON_STERGE_ACTIVE_BUNURI_XPATH = '/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[7]/div/div/div/a[4]'
     BUTON_CONFIRMARE_STERGERE_ACTIVE_BUNURI_XPATH = '//*[@id="body"]/div[7]/div/div[3]/button[1]'
+    TEXT_DENUMIRE_BUN_XPATH = "/html/body/div[1]/section/div[4]/div[2]/div/div[1]/div/table/tbody/tr[1]/td[3]/div/div/h5/a"
 
     #locatori pagina de logout
     BUTON_LOGOUT_XPATH = "//a[@class='d-block header-icon-box']//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"
