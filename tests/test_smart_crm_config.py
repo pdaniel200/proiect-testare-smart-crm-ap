@@ -148,7 +148,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         # Verifica daca transferul a fost efectuat cu succes
         self.assertEqual(valoare_cont_initial_c, valoare_cont_dupa_transfer_c + 10)
         # scrie in log ca testul a fost efectuat cu succes
-        logger.info("Testare transfer intre conturi bancare - Efectuat cu succes.")
+        logger.info("Testare transfer intre conturi bancare - Efectuat cu succes. Pentru verificare am facut un transfer de 10 lei si am verificat daca valoarea contului a scazut cu valoarea transferata.")
         self.conturibancaretransfer_page.driver.save_screenshot("Results/test_d_transfer_intre_conturi.png")
 
     def test_e_alocare_program_angajat(self):
@@ -159,7 +159,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         mesaj_notificare_sistem = self.driver.find_element(By.XPATH, self.alocareprogram_page.mesaj_notificari_sistem_locator).text
         self.assertEqual(mesaj_notificare_sistem, 'Schimbul angajatului a fost salvat.')
         # scrie in log ca testul a fost efectuat cu succes
-        logger.info("Test alocare program angajat - Efectuat cu succes.")
+        logger.info("Test alocare program angajat - Efectuat cu succes. Pentru verificare am adaugat un program de lucru pentru prima zi a lunii curente si am verificat daca s-a salvat cu succes si am verificat mesajul de notificare.")
         self.alocareprogram_page.driver.save_screenshot("Results/test_e_alocare_program_angajat.png")
         time.sleep(2)
         self.alocareprogram_page.sterge_program_angajat()
@@ -169,60 +169,111 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         mesaj_notificare_sistem = self.driver.find_element(By.XPATH,
                                                            self.alocareprogram_page.mesaj_notificari_sistem_locator).text
         self.assertEqual(mesaj_notificare_sistem, 'S-a șters cu succes.')
-        # scrie in log ca testul a fost efectuat cu succes
+        # scrie in log ca programul a fost sters cu succes
         logger.info("Test stergere program angajat - Efectuat cu succes.")
         time.sleep(2)
 
-    @pytest.mark.smoke()  # marcarea testului ca smoke
     def test_f_adaugare_task(self):
-        self.test_a_login_valid()
-        # self.driver.get("https://app.smart-crm.ro/account/shifts")
-        time.sleep(2)
         '''Metoda care efectueaza testarea paginii de adaugare task'''
-
         # Aceseaza pagina de sarcini din cadrul aplicatiei
         self.adaugaretask_page.driver.get("https://app.smart-crm.ro/account/tasks")
         time.sleep(4)
         self.adaugaretask_page.adauga_task_angajat()
-        time.sleep(2)
+        # Asteapta pana cand taskul adaugat este cel asteptat
+        WebDriverWait(self.driver, 10).until(
+            EC.text_to_be_present_in_element((By.XPATH, self.adaugaretask_page.text_task_nou_adaugat_locator),
+                                             "Sarcina Test"))
+        # Verifica daca taskul adaugat este cel asteptat
+        task_adaugat = self.driver.find_element(By.XPATH,
+                                                self.adaugaretask_page.text_task_nou_adaugat_locator).text
+        self.assertEqual(task_adaugat, "Sarcina Test")
         self.adaugaretask_page.driver.save_screenshot("Results/test_f_adaugare_task.png")
         # scrie in log ca testul a fost efectuat cu succes
-        logger.info("Test adaugare task - Efectuat cu succes.")
+        logger.info("Test adaugare task - Efectuat cu succes. Pentru verificare am adaugat un task si am verificat daca exista in lista de taskuri")
         time.sleep(2)
         self.adaugaretask_page.sterge_task_angajat()
         time.sleep(2)
-        # scrie in log ca testul a fost efectuat cu succes
+        # scrie in log ca taskul a fost sters cu succes
         logger.info("Test stergere task - Efectuat cu succes.")
 
     def test_g_adaugare_comanda_furnizor(self):
         '''Metoda care efectueaza testarea paginii de adaugare comanda furnizor'''
+        time.sleep(2)
+        self.driver.find_element(By.XPATH, self.adaugarecomandafurnizor_page.buton_meniu_achizitii_locator).click()
+        time.sleep(2)
+        self.driver.find_element(By.XPATH, self.adaugarecomandafurnizor_page.buton_meniu_comenzi_furnizori_locator).click()
+        WebDriverWait(self.driver, 10).until(
+            EC.text_to_be_present_in_element(
+                (By.XPATH, self.adaugarecomandafurnizor_page.text_numar_comanda_locator),
+                "PO#002"))
+        # self.driver.find_element(By.XPATH, self.adaugarecomandafurnizor_page.buton_adaugare_comanda_locator).click()
+        time.sleep(2)
+        numar_ultima_comanda = self.driver.find_element(By.XPATH, self.adaugarecomandafurnizor_page.text_numar_comanda_locator).text
+        # Extragere numere din string
+        numar_ultima_comanda_str = re.search(r'\d+', numar_ultima_comanda)
+        numar_ultima_comanda_int = int(numar_ultima_comanda_str.group())
+        print(f'numar_comanda_initiala: {numar_ultima_comanda_int}')
         self.adaugarecomandafurnizor_page.adauga_comanda_furnizor()
         time.sleep(2)
+        numar_comanda_noua = self.driver.find_element(By.XPATH, self.adaugarecomandafurnizor_page.text_numar_comanda_locator).text
+        # Extragere numere din string
+        numar_comanda_noua_str = re.search(r'\d+', numar_comanda_noua)
+        numar_comanda_noua_int = int(numar_comanda_noua_str.group())
+        print(f'numar_comanda_finala: {numar_comanda_noua_int}')
+        # Verifica daca comanda a fost adaugata cu succes
+        self.assertEqual(numar_comanda_noua_int, numar_ultima_comanda_int + 1)
         self.adaugarecomandafurnizor_page.driver.save_screenshot("Results/test_g_adaugare_comanda_furnizor.png")
         time.sleep(2)
         self.adaugarecomandafurnizor_page.sterge_comanda_furnizor()
         # scrie in log ca testul a fost efectuat cu succes
-        logger.info("Test adaugare comanda furnizor - Efectuat cu succes.")
+        logger.info("Test adaugare comanda furnizor - Efectuat cu succes. Pentru verificare am adaugat o comanda si am verificat daca numarul a fost incrementat cu o unitate.")
         time.sleep(2)
 
     def test_h_adaugare_cheltuiala(self):
         '''Metoda care efectueaza testarea paginii de adaugare cheltuiala'''
         self.adaugarecheltuiala_page.adauga_cheltuiala()
-        time.sleep(2)
+        WebDriverWait(self.driver, 10).until(
+            EC.text_to_be_present_in_element((By.XPATH, self.adaugarecheltuiala_page.nume_cheltuiala_locator),
+                                             "Cheltuiala Test"))
+        # Verifica daca cheltuiala adaugata este cea asteptata
+        nume_cheltuiala = self.driver.find_element(By.XPATH,
+                                                self.adaugarecheltuiala_page.nume_cheltuiala_locator).text
+        self.assertEqual(nume_cheltuiala, "Cheltuiala Test")
         self.adaugarecheltuiala_page.driver.save_screenshot("Results/test_h_adaugare_cheltuiala.png")
-        time.sleep(1)
+
         self.adaugarecheltuiala_page.sterge_cheltuiala()
+        WebDriverWait(self.driver, 10).until(
+            EC.text_to_be_present_in_element((By.XPATH, self.adaugarecheltuiala_page.mesaj_notificari_sistem_stergere_locator),
+                                             "S-a șters cu succes."))
+        mesaj_notificare_sistem = self.driver.find_element(By.XPATH,
+                                                           self.adaugarecheltuiala_page.mesaj_notificari_sistem_stergere_locator).text
+        self.assertEqual(mesaj_notificare_sistem, 'S-a șters cu succes.')
         # scrie in log ca testul a fost efectuat cu succes
-        logger.info("Test adaugare cheltuiala - Efectuat cu succes.")
+        logger.info("Test adaugare + stergere cheltuiala - Efectuat cu succes. Pentru verificare am adaugat o cheltuiala si am verificat daca exista in lista de cheltuieli si am sters-o.")
         time.sleep(2)
 
+
     def test_i_adaugare_bunuri(self):
+
         '''Metoda care efectueaza testarea paginii de adaugare bunuri'''
+
         self.adaugarebunuri_page.adauga_active_bunuri()
-        time.sleep(2)
-        self.adaugarebunuri_page.driver.save_screenshot("Results/test_i_adaugare_bunuri.png")
+
+        # Asteapta pana cand acciza adaugata este cea asteptata
+        WebDriverWait(self.driver, 10).until(
+            EC.text_to_be_present_in_element((By.XPATH, self.adaugarebunuri_page.text_denumire_bun_locator),
+                                             "Bun Test"))
+        # Verifica daca acciza adaugata este cea asteptata
+        bun_adaugat = self.driver.find_element(By.XPATH,
+                                                self.adaugarebunuri_page.text_denumire_bun_locator).text
+        self.assertEqual(bun_adaugat, "Bun Test")
+        # self.adaugaretask_page.driver.save_screenshot("Results/test_f_adaugare_task.png")
         # scrie in log ca testul a fost efectuat cu succes
-        logger.info("Test adaugare bunuri - Efectuat cu succes.")
+        logger.info("Test adaugare bunuri - Efectuat cu succes. Pentru verificare am adaugat un bun si am verificat daca exista in lista de bunuri")
+        time.sleep(2)
+
+        self.adaugarebunuri_page.driver.save_screenshot("Results/test_i_adaugare_bunuri.png")
+
         time.sleep(2)
         self.adaugarebunuri_page.sterge_active_bunuri()
         time.sleep(2)
@@ -230,14 +281,16 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         logger.info("Test stergere bunuri - Efectuat cu succes.")
         time.sleep(2)
 
+
     def test_j_iesire_cont(self):
         '''Metoda care efectueaza testarea paginii de iesire din cont'''
         # Efectuați pașii de deconectare
         self.dashboard_page.iesire_cont()
+        assert "https://app.smart-crm.ro/login" in self.driver.current_url
         time.sleep(2)
 
         # scrie in log ca testul a fost efectuat cu succes
-        logger.info("Testare iesire din cont - Iesirea din cont a fost efectuata cu succes.")
+        logger.info("Testare iesire din cont - Iesirea din cont a fost efectuata cu succes. Am verificat daca s-a redirectionat catre pagina de login.")
 
 
     def test_k_login_invalid_password(self):
@@ -263,17 +316,18 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
             raise  # Ridicare exceptie pentru a fi marcata in raportul de testare
         else:
             # Scrie in log ca testul a fost efectuat cu succes
-            logger.info("Testare Pagina Login - Test login și returnare mesaj a fost efectuat cu succes.")
+            logger.info("Testare Pagina Login - Test login și returnare mesaj pentru parola invalida a fost efectuat cu succes.")
 
     @pytest.mark.skip(reason="Nu mai este necesar")
     def test_titlu_pg_principala(self):
         self.driver.get("https://smart-crm.ro/")
         assert "Smart CRM" in self.driver.title
 
-
+    @pytest.mark.smoke()  # marcarea testului ca smoke
     def test_smoke_title(self):
-        self.driver.get("https://app.smart-crm.ro/login")
-        assert "SMART CRM" in self.driver.title
+        self.test_a_login_valid()
+        time.sleep(2)
+        assert "Bord" in self.driver.title
 
 if __name__ == '__main__': # rulare test in mod standalone
     unittest.main()

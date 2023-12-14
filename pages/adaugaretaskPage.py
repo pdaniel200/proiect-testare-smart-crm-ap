@@ -24,6 +24,7 @@ class AdaugaTaskPage:
         self.buton_actiune_la_task_locator = LocatoriPaginaSmartCrm.BUTON_ACTIUNE_LA_TASK_XPATH
         self.buton_sterge_task_locator = LocatoriPaginaSmartCrm.BUTON_STERGE_TASK_XPATH
         self.buton_confirmare_stergere_task_locator = LocatoriPaginaSmartCrm.BUTON_CONFIRMARE_STERGERE_TASK_XPATH
+        self.text_task_nou_adaugat_locator = LocatoriPaginaSmartCrm.TEXT_TASK_NOU_ADAUGAT_XPATH
 
     def adauga_task_angajat(self):
         self.driver.find_element(By.XPATH, self.apasa_buton_adaugare_sarcina_locator).click()

@@ -26,6 +26,7 @@ class AdaugaBunuriPage:
         self.buton_actiune_active_bunuri_locator = LocatoriPaginaSmartCrm.BUTON_ACTIUNE_ACTIVE_BUNURI_XPATH
         self.buton_sterge_active_bunuri_locator = LocatoriPaginaSmartCrm.BUTON_STERGE_ACTIVE_BUNURI_XPATH
         self.buton_confirmare_stergere_active_bunuri_locator = LocatoriPaginaSmartCrm.BUTON_CONFIRMARE_STERGERE_ACTIVE_BUNURI_XPATH
+        self.text_denumire_bun_locator = LocatoriPaginaSmartCrm.TEXT_DENUMIRE_BUN_XPATH
 
     def adauga_active_bunuri(self):
         self.driver.find_element(By.XPATH, self.apasa_buton_meniu_achiziitii_locator).click()

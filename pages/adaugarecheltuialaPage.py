@@ -5,8 +5,10 @@
 
 import time
 from selenium.webdriver.common.by import By
-from Locators.locators import LocatoriPaginaSmartCrm
+from selenium.webdriver.support.wait import WebDriverWait
 
+from Locators.locators import LocatoriPaginaSmartCrm
+from selenium.webdriver.support import expected_conditions as EC
 
 class AdaugaCheltuialaPage:
     def __init__(self, driver):
@@ -25,6 +27,10 @@ class AdaugaCheltuialaPage:
         self.buton_actiune_cheltuiala_locator = LocatoriPaginaSmartCrm.BUTON_ACTIUNE_CHELTUIALA_XPATH
         self.buton_sterge_cheltuiala_locator = LocatoriPaginaSmartCrm.BUTON_STERGE_CHELTUIALA_XPATH
         self.buton_confirmare_stergere_cheltuiala_locator = LocatoriPaginaSmartCrm.BUTON_CONFIRMARE_STERGERE_CHELTUIALA_XPATH
+        self.nume_cheltuiala_locator = LocatoriPaginaSmartCrm.NUME_CHELTUIALA_XPATH
+
+        # self.mesaj_notificari_sistem_locator = LocatoriPaginaSmartCrm.MESAJ_NOTIFICARI_SISTEM_XPATH
+        self.mesaj_notificari_sistem_stergere_locator = LocatoriPaginaSmartCrm.MESAJ_NOTIFICARI_SISTEM_STERGERE_XPATH
 
     def adauga_cheltuiala(self):
         self.driver.find_element(By.XPATH, self.apasa_buton_meniu_finante_locator).click()
@@ -42,7 +48,8 @@ class AdaugaCheltuialaPage:
         self.driver.find_element(By.XPATH, self.selecteaza_angajat_1_locator).click()
         self.time.sleep(2)
         self.driver.find_element(By.XPATH, self.buton_salvare_cheltuiala_locator).click()
-        self.time.sleep(3)
+        # self.time.sleep(2)
+
 
     def sterge_cheltuiala(self):
         self.driver.find_element(By.XPATH, self.buton_actiune_cheltuiala_locator).click()
@@ -50,4 +57,4 @@ class AdaugaCheltuialaPage:
         self.driver.find_element(By.XPATH, self.buton_sterge_cheltuiala_locator).click()
         self.time.sleep(2)
         self.driver.find_element(By.XPATH, self.buton_confirmare_stergere_cheltuiala_locator).click()
-        self.time.sleep(2)
+        # self.time.sleep(2)
