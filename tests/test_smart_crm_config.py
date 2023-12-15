@@ -159,7 +159,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
         mesaj_notificare_sistem = self.driver.find_element(By.XPATH, self.alocareprogram_page.mesaj_notificari_sistem_locator).text
         self.assertEqual(mesaj_notificare_sistem, 'Schimbul angajatului a fost salvat.')
         # scrie in log ca testul a fost efectuat cu succes
-        logger.info("Test alocare program angajat - Efectuat cu succes. Pentru verificare am adaugat un program de lucru pentru prima zi a lunii curente si am verificat daca s-a salvat cu succes si am verificat mesajul de notificare.")
+        logger.info("Test alocare program angajat - Efectuat cu succes. Pentru verificare am adaugat un program de lucru pentru prima zi a lunii curente si am verificat daca s-a salvat prin verificarea mesajului de notificare.")
         self.alocareprogram_page.driver.save_screenshot("Results/test_e_alocare_program_angajat.png")
         time.sleep(2)
         self.alocareprogram_page.sterge_program_angajat()
@@ -175,7 +175,7 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
 
     # @pytest.mark.smoke()  # test smoke
     def test_f_adaugare_task(self):
-        # self.test_a_login_valid()
+
         '''Metoda care efectueaza testarea paginii de adaugare task'''
         # Aceseaza pagina de sarcini din cadrul aplicatiei
         self.adaugaretask_page.driver.get("https://app.smart-crm.ro/account/tasks")
@@ -208,20 +208,19 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
             EC.text_to_be_present_in_element(
                 (By.XPATH, self.adaugarecomandafurnizor_page.text_numar_comanda_locator),
                 "PO#002"))
-        # self.driver.find_element(By.XPATH, self.adaugarecomandafurnizor_page.buton_adaugare_comanda_locator).click()
         time.sleep(2)
         numar_ultima_comanda = self.driver.find_element(By.XPATH, self.adaugarecomandafurnizor_page.text_numar_comanda_locator).text
         # Extragere numere din string
         numar_ultima_comanda_str = re.search(r'\d+', numar_ultima_comanda)
         numar_ultima_comanda_int = int(numar_ultima_comanda_str.group())
-        print(f'numar_comanda_initiala: {numar_ultima_comanda_int}')
+        print(f'Ultimul numar inainte de adaugare comanda: {numar_ultima_comanda_int}')
         self.adaugarecomandafurnizor_page.adauga_comanda_furnizor()
         time.sleep(2)
         numar_comanda_noua = self.driver.find_element(By.XPATH, self.adaugarecomandafurnizor_page.text_numar_comanda_locator).text
         # Extragere numere din string
         numar_comanda_noua_str = re.search(r'\d+', numar_comanda_noua)
         numar_comanda_noua_int = int(numar_comanda_noua_str.group())
-        print(f'numar_comanda_finala: {numar_comanda_noua_int}')
+        print(f'Ultimul numar dupa adaugare comanda: {numar_comanda_noua_int}')
         # Verifica daca comanda a fost adaugata cu succes
         self.assertEqual(numar_comanda_noua_int, numar_ultima_comanda_int + 1, "Numarul comenzii nu a fost incrementat cu o unitate.")
         self.adaugarecomandafurnizor_page.driver.save_screenshot("Results/test_g_adaugare_comanda_furnizor.png")
@@ -300,10 +299,9 @@ class TestLoginSmartCRM(ConfigurareDriver, unittest.TestCase, LoginPage, Dashboa
             self.login_page.enter_password(self.PAROLA_GRESITA)
             time.sleep(1)
             self.login_page.click_login()
-            # message = self.driver.find_element(By.XPATH, self.mesaj_invalid_feedback_locator).text
             msg = self.login_page.vreificare_mesaj_parola_gresita()
             # Verifica daca mesajul de eroare este cel asteptat
-            self.assertEqual(msg, "Aceste acreditări nu se potrivesc cu înregistrările noastre.")
+            self.assertEqual(msg, "Aceste acreditari nu se potrivesc cu mesajul nostru")
             time.sleep(1)
             # Salveaza o captura de ecran a paginii de conectare cu mesajul parola gresita
             self.login_page.driver.save_screenshot("Results/test_j_login_invalid_pass.png")
